@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BiteWise | Food Menu</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="container nav">
+
+        <!-- LOGO -->
+
+        <div
+            onclick="window.location.href='../index.html'"
+            style="cursor:pointer;"
+        >
+
+            <div class="logo">
+                Bite<span>Wise</span>
+            </div>
+
+            <div class="tagline">
+                SMART FOOD • SMART CHOICE
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <div class="nav-links">
+
+            <button
+                onclick="window.location.href='../index.html'"
+            >
+                Home
+            </button>
+
+            <button
+                onclick="window.location.href='shop.html'"
+            >
+                Restaurants
+            </button>
+
+            <button
+                class="cart-btn"
+                onclick="window.location.href='cart.html'"
+            >
+
+                Cart
+
+                <span
+                    id="cartCount"
+                    class="cart-count"
+                >
+                    0
+                </span>
+
+            </button>
+
+            <button
+                onclick="window.location.href='login.html'"
+            >
+                Login
+            </button>
+
+        </div>
+
+
+        <!-- MOBILE MENU -->
+
+        <button
+            class="mobile-menu"
+            onclick="window.location.href='shop.html'"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+    <!-- =================================================
+         RESTAURANT HEADER
+    ================================================== -->
+
+    <section class="page-top">
+
+        <div class="container">
+
+
+            <!-- BACK BUTTON -->
+
+            <button
+                type="button"
+                onclick="window.location.href='shop.html'"
+                style="
+                    background:none;
+                    color:#ff5a1f;
+                    font-weight:bold;
+                    margin-bottom:18px;
+                    padding:0;
+                    cursor:pointer;
+                "
+            >
+                ← Back to Restaurants
+            </button>
+
+
+            <!-- RESTAURANT DETAILS -->
+
+            <div
+                class="shop-header"
+                id="restaurantHeader"
+            >
+            </div>
+
+
+
+            <!-- =================================================
+                 FOOD SEARCH
+            ================================================== -->
+
+            <div class="page-search">
+
+                <input
+                    type="text"
+                    id="foodSearch"
+                    placeholder="Search food..."
+                    onkeyup="searchFood()"
+                >
+
+                <button
+                    type="button"
+                    onclick="searchFood()"
+                >
+                    Search
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CATEGORY FILTER
+            ================================================== -->
+
+            <div class="food-filter">
+
+                <button
+                    type="button"
+                    class="filter-pill active"
+                    onclick="foodFilter('All', this)"
+                >
+                    All
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="foodFilter('Biryani', this)"
+                >
+                    Biryani
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="foodFilter('South Indian', this)"
+                >
+                    South Indian
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="foodFilter('North Indian', this)"
+                >
+                    North Indian
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="foodFilter('Pizza', this)"
+                >
+                    Pizza
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="foodFilter('Burger', this)"
+                >
+                    Burger
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="foodFilter('Chinese', this)"
+                >
+                    Chinese
+                </button>
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="foodFilter('Dessert', this)"
+                >
+                    Dessert
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FOOD MENU
+    ================================================== -->
+
+    <section
+        style="
+            padding-top:20px;
+            padding-bottom:40px;
+        "
+    >
+
+        <div class="container">
+
+
+            <!-- SECTION HEADER -->
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2 class="section-title">
+
+                        Food
+                        <span>Menu</span>
+
+                    </h2>
+
+                    <p
+                        class="section-subtitle"
+                        id="foodResultText"
+                    >
+                        Loading food menu...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FOOD GRID -->
+
+            <div
+                id="restaurantFoods"
+                class="food-grid"
+                style="
+                    display:grid;
+                    grid-template-columns:
+                        repeat(
+                            auto-fit,
+                            minmax(280px, 1fr)
+                        );
+                    gap:24px;
+                    width:100%;
+                    align-items:stretch;
+                "
+            >
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         WHY COMPARE
+    ===================================================== -->
+
+    <section class="compare-section">
+
+        <div class="container">
+
+            <div class="compare-box">
+
+                <div class="compare-title">
+
+                    <div>
+
+                        <h2>
+                            Why compare?
+                        </h2>
+
+                        <p class="section-subtitle">
+
+                            BiteWise helps you compare
+                            food prices before ordering.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- WHY GRID -->
+
+                <div class="why-grid">
+
+
+                    <div class="why-card">
+
+                        <div class="why-icon">
+                            ₹
+                        </div>
+
+                        <h3>
+                            Compare Prices
+                        </h3>
+
+                        <p>
+                            Check different prices
+                            before making your order.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="why-card">
+
+                        <div class="why-icon">
+                            ⭐
+                        </div>
+
+                        <h3>
+                            Check Ratings
+                        </h3>
+
+                        <p>
+                            See food ratings and
+                            choose better options.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="why-card">
+
+                        <div class="why-icon">
+                            ⏱
+                        </div>
+
+                        <h3>
+                            Save Time
+                        </h3>
+
+                        <p>
+                            Quickly find suitable
+                            food and restaurants.
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="why-card">
+
+                        <div class="why-icon">
+                            ✓
+                        </div>
+
+                        <h3>
+                            Smart Choice
+                        </h3>
+
+                        <p>
+                            Compare before ordering
+                            and make a smarter choice.
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+
+            <!-- ABOUT -->
+
+            <div>
+
+                <div class="footer-logo">
+                    BiteWise
+                </div>
+
+                <p>
+                    Smart food ordering with
+                    intelligent price comparison.
+                    Compare. Save. Order.
+                </p>
+
+            </div>
+
+
+
+            <!-- EXPLORE -->
+
+            <div>
+
+                <h4>
+                    Explore
+                </h4>
+
+                <ul>
+
+                    <li
+                        onclick="window.location.href='../index.html'"
+                    >
+                        Home
+                    </li>
+
+                    <li
+                        onclick="window.location.href='shop.html'"
+                    >
+                        Restaurants
+                    </li>
+
+                    <li>
+                        Deals
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- BITEWISE -->
+
+            <div>
+
+                <h4>
+                    BiteWise
+                </h4>
+
+                <ul>
+
+                    <li>
+                        About
+                    </li>
+
+                    <li>
+                        Features
+                    </li>
+
+                    <li>
+                        How it works
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- SUPPORT -->
+
+            <div>
+
+                <h4>
+                    Support
+                </h4>
+
+                <ul>
+
+                    <li>
+                        Help Center
+                    </li>
+
+                    <li>
+                        Privacy
+                    </li>
+
+                    <li>
+                        Terms
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- COPYRIGHT -->
+
+        <div class="copyright">
+
+            © 2026 BiteWise —
+            Smart Food. Smart Choice.
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div id="toast">
+    Message
+</div>
+
+
+
+<!-- =====================================================
+     MAIN SCRIPT
+===================================================== -->
+
+<script src="../js/script.js"></script>
+
+
+
+<!-- =====================================================
+     FOOD PAGE SCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   CURRENT RESTAURANT
+===================================================== */
+
+let currentRestaurant = null;
+
+
+
+/* =====================================================
+   LOAD RESTAURANT
+===================================================== */
+
+function loadRestaurant() {
+
+    const restaurantData =
+        localStorage.getItem(
+            "bitewiseRestaurant"
+        );
+
+
+    console.log(
+        "Restaurant from localStorage:",
+        restaurantData
+    );
+
+
+    /*
+     * No restaurant selected
+     */
+
+    if (!restaurantData) {
+
+        console.error(
+            "No restaurant selected"
+        );
+
+        window.location.href =
+            "shop.html";
+
+        return;
+
+    }
+
+
+    try {
+
+        /*
+         * Convert JSON string
+         * into restaurant object
+         */
+
+        currentRestaurant =
+            JSON.parse(
+                restaurantData
+            );
+
+
+        console.log(
+            "Selected restaurant:",
+            currentRestaurant
+        );
+
+
+        /*
+         * Validate restaurant
+         */
+
+        if (
+            !currentRestaurant ||
+            !currentRestaurant.name
+        ) {
+
+            throw new Error(
+                "Invalid restaurant data"
+            );
+
+        }
+
+
+        /*
+         * Render restaurant header
+         */
+
+        renderRestaurantHeader();
+
+
+        /*
+         * Wait for backend foods
+         */
+
+        waitForFoodData();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Failed to load restaurant:",
+            error
+        );
+
+
+        localStorage.removeItem(
+            "bitewiseRestaurant"
+        );
+
+
+        localStorage.removeItem(
+            "bitewiseRestaurantId"
+        );
+
+
+        window.location.href =
+            "shop.html";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   WAIT FOR FOOD DATA
+===================================================== */
+
+function waitForFoodData() {
+
+    let attempts = 0;
+
+
+    /*
+     * Check every 100 milliseconds
+     */
+
+    const foodTimer =
+        setInterval(
+            function () {
+
+                attempts++;
+
+
+                console.log(
+                    "Waiting for foods...",
+                    foods.length
+                );
+
+
+                /*
+                 * Backend foods loaded
+                 */
+
+                if (
+                    Array.isArray(foods) &&
+                    foods.length > 0
+                ) {
+
+                    clearInterval(
+                        foodTimer
+                    );
+
+
+                    console.log(
+                        "Food data loaded:",
+                        foods.length
+                    );
+
+
+                    renderRestaurantFoods();
+
+
+                    return;
+
+                }
+
+
+                /*
+                 * Stop after 10 seconds
+                 */
+
+                if (
+                    attempts >= 100
+                ) {
+
+                    clearInterval(
+                        foodTimer
+                    );
+
+
+                    console.error(
+                        "Food data loading timeout"
+                    );
+
+
+                    renderRestaurantFoods(
+                        []
+                    );
+
+                }
+
+            },
+            100
+        );
+
+}
+
+
+
+/* =====================================================
+   RESTAURANT HEADER
+===================================================== */
+
+function renderRestaurantHeader() {
+
+    const container =
+        document.getElementById(
+            "restaurantHeader"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    /*
+     * Restaurant image
+     */
+
+    const image =
+        currentRestaurant.image ||
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80";
+
+
+    /*
+     * Restaurant category
+     */
+
+    const category =
+        currentRestaurant.category ||
+        currentRestaurant.cuisine ||
+        "Restaurant";
+
+
+    /*
+     * Rating
+     */
+
+    const rating =
+        currentRestaurant.rating ||
+        "4.5";
+
+
+    /*
+     * Delivery time
+     */
+
+    const deliveryTime =
+        currentRestaurant.deliveryTime ||
+        currentRestaurant.time ||
+        30;
+
+
+    container.innerHTML = `
+
+        <div
+            style="
+                display:flex;
+                align-items:center;
+                gap:20px;
+                flex-wrap:wrap;
+                width:100%;
+            "
+        >
+
+
+            <!-- RESTAURANT IMAGE -->
+
+            <img
+                src="${image}"
+                alt="${currentRestaurant.name}"
+                style="
+                    width:120px;
+                    height:100px;
+                    min-width:120px;
+                    object-fit:cover;
+                    border-radius:16px;
+                    box-shadow:
+                        0 8px 20px rgba(0,0,0,.12);
+                "
+                onerror="
+                    this.onerror=null;
+                    this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=500&q=80';
+                "
+            >
+
+
+            <!-- RESTAURANT DETAILS -->
+
+            <div>
+
+                <h1
+                    style="
+                        margin-bottom:8px;
+                    "
+                >
+                    ${currentRestaurant.name}
+                </h1>
+
+
+                <p
+                    style="
+                        color:#777;
+                        margin-bottom:10px;
+                    "
+                >
+                    ${category}
+                </p>
+
+
+                <div>
+
+                    <span class="rating">
+
+                        ⭐
+                        ${rating}
+
+                    </span>
+
+
+                    &nbsp;&nbsp;
+
+
+                    <span>
+
+                        🕒
+                        ${deliveryTime}
+                        min
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =====================================================
+   GET RESTAURANT FOODS
+===================================================== */
+
+function getRestaurantFoods() {
+
+    if (!currentRestaurant) {
+
+        return [];
+
+    }
+
+
+    /*
+     * Selected restaurant ID
+     */
+
+    const restaurantId =
+        Number(
+            currentRestaurant.id ||
+            currentRestaurant.restaurant_id
+        );
+
+
+    /*
+     * Selected restaurant name
+     */
+
+    const restaurantName =
+        String(
+            currentRestaurant.name || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    console.log(
+        "Filtering restaurant:",
+        restaurantName,
+        "ID:",
+        restaurantId
+    );
+
+
+    /*
+     * Filter foods
+     */
+
+    const filteredFoods =
+        foods.filter(
+            function (food) {
+
+
+                /*
+                 * Food restaurant ID
+                 */
+
+                const foodRestaurantId =
+                    Number(
+                        food.restaurant_id ||
+                        food.restaurantId ||
+                        food.restaurant?.id ||
+                        0
+                    );
+
+
+                /*
+                 * If ID matches
+                 */
+
+                if (
+                    restaurantId > 0 &&
+                    foodRestaurantId > 0 &&
+                    restaurantId ===
+                    foodRestaurantId
+                ) {
+
+                    return true;
+
+                }
+
+
+                /*
+                 * Fallback:
+                 * match restaurant name
+                 */
+
+                const foodRestaurantName =
+                    String(
+
+                        typeof food.restaurant ===
+                        "string"
+
+                            ? food.restaurant
+
+                            : (
+                                food.restaurant?.name ||
+                                ""
+                            )
+
+                    )
+                    .trim()
+                    .toLowerCase();
+
+
+                return (
+                    foodRestaurantName ===
+                    restaurantName
+                );
+
+            }
+        );
+
+
+    console.log(
+        "Foods found for",
+        currentRestaurant.name,
+        ":",
+        filteredFoods
+    );
+
+
+    return filteredFoods;
+
+}
+
+
+
+/* =====================================================
+   RENDER FOOD MENU
+===================================================== */
+
+function renderRestaurantFoods(
+    foodList = getRestaurantFoods()
+) {
+
+    const container =
+        document.getElementById(
+            "restaurantFoods"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    /*
+     * EMPTY
+     */
+
+    if (
+        !foodList ||
+        foodList.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div
+                class="empty-state"
+                style="
+                    grid-column:1 / -1;
+                    width:100%;
+                    text-align:center;
+                    padding:40px 20px;
+                "
+            >
+
+                <h3>
+                    No food available
+                </h3>
+
+                <p>
+                    No food items are available
+                    for
+                    ${currentRestaurant
+                        ? currentRestaurant.name
+                        : "this restaurant"}.
+                </p>
+
+            </div>
+
+        `;
+
+
+        updateFoodResultText(
+            0
+        );
+
+
+        return;
+
+    }
+
+
+
+    /*
+     * CREATE FOOD CARDS
+     */
+
+    container.innerHTML =
+
+        foodList
+            .map(
+                function (food) {
+
+                    return `
+
+                <div
+                    class="food-card"
+                    style="
+                        cursor:pointer;
+                        width:100%;
+                        min-width:0;
+                        box-sizing:border-box;
+                    "
+                    onclick="
+                        if (
+                            typeof openFoodFromCard ===
+                            'function'
+                        ) {
+                            openFoodFromCard(${food.id});
+                        }
+                    "
+                >
+
+
+                    <!-- FOOD IMAGE -->
+
+                    <img
+                        src="${food.image || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=700&q=80'}"
+                        alt="${food.name}"
+                        class="food-img"
+                        onerror="
+                            this.onerror=null;
+                            this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=700&q=80';
+                        "
+                    >
+
+
+
+                    <!-- FOOD CONTENT -->
+
+                    <div
+                        class="food-card-content"
+                        style="
+                            width:100%;
+                            box-sizing:border-box;
+                        "
+                    >
+
+
+                        <!-- FOOD NAME -->
+
+                        <h3>
+                            ${food.name}
+                        </h3>
+
+
+
+                        <!-- RESTAURANT -->
+
+                        <p
+                            class="restaurant-name"
+                        >
+                            ${food.restaurant || currentRestaurant.name}
+                        </p>
+
+
+
+                        <!-- CATEGORY -->
+
+                        <p
+                            style="
+                                color:#888;
+                                font-size:13px;
+                                margin-top:4px;
+                            "
+                        >
+                            ${food.category || ""}
+                        </p>
+
+
+
+                        <!-- META -->
+
+                        <div
+                            class="food-meta"
+                        >
+
+                            <span>
+
+                                ⭐
+                                ${food.rating || "4.5"}
+
+                            </span>
+
+
+                            <span>
+
+                                🕒
+                                ${food.time || 30}
+                                min
+
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- BOTTOM -->
+
+                        <div
+                            class="food-bottom"
+                            style="
+                                width:100%;
+                                box-sizing:border-box;
+                            "
+                        >
+
+
+                            <!-- PRICE -->
+
+                            <strong>
+                                ₹${food.price}
+                            </strong>
+
+
+
+                            <!-- ACTIONS -->
+
+                            <div
+                                class="food-actions"
+                                onclick="
+                                    event.stopPropagation()
+                                "
+                            >
+
+
+                                <!-- COMPARE -->
+
+                                <button
+                                    type="button"
+                                    class="compare-btn"
+                                    onclick="
+                                        event.stopPropagation();
+
+                                        if (
+                                            typeof openCompare ===
+                                            'function'
+                                        ) {
+                                            openCompare(${food.id});
+                                        }
+                                    "
+                                >
+                                    ⚖ Compare
+                                </button>
+
+
+
+                                <!-- ADD TO CART -->
+
+                                <button
+                                    type="button"
+                                    class="add-btn"
+                                    onclick="
+                                        event.stopPropagation();
+
+                                        if (
+                                            typeof addToCart ===
+                                            'function'
+                                        ) {
+                                            addToCart(${food.id});
+                                        }
+                                    "
+                                >
+                                    + Add
+                                </button>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+                }
+            )
+            .join("");
+
+
+    /*
+     * UPDATE RESULT
+     */
+
+    updateFoodResultText(
+        foodList.length
+    );
+
+}
+
+
+
+/* =====================================================
+   UPDATE FOOD RESULT TEXT
+===================================================== */
+
+function updateFoodResultText(
+    count
+) {
+
+    const result =
+        document.getElementById(
+            "foodResultText"
+        );
+
+
+    if (!result) {
+
+        return;
+
+    }
+
+
+    if (
+        count === 0
+    ) {
+
+        result.textContent =
+            "No food items available";
+
+    }
+
+    else {
+
+        result.textContent =
+            `${count} food item(s) available`;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SEARCH FOOD
+===================================================== */
+
+function searchFood() {
+
+    const input =
+        document.getElementById(
+            "foodSearch"
+        );
+
+
+    if (!input) {
+
+        return;
+
+    }
+
+
+    const searchText =
+        input.value
+            .trim()
+            .toLowerCase();
+
+
+    /*
+     * Get current restaurant foods
+     */
+
+    const restaurantFoods =
+        getRestaurantFoods();
+
+
+
+    /*
+     * Empty search
+     */
+
+    if (!searchText) {
+
+        renderRestaurantFoods(
+            restaurantFoods
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+     * Search food name/category
+     */
+
+    const filtered =
+        restaurantFoods.filter(
+            function (food) {
+
+                const foodName =
+                    String(
+                        food.name || ""
+                    )
+                    .toLowerCase();
+
+
+                const category =
+                    String(
+                        food.category || ""
+                    )
+                    .toLowerCase();
+
+
+                return (
+
+                    foodName.includes(
+                        searchText
+                    )
+
+                    ||
+
+                    category.includes(
+                        searchText
+                    )
+
+                );
+
+            }
+        );
+
+
+    renderRestaurantFoods(
+        filtered
+    );
+
+}
+
+
+
+/* =====================================================
+   FOOD CATEGORY FILTER
+===================================================== */
+
+function foodFilter(
+    category,
+    button
+) {
+
+
+    /*
+     * Remove active
+     */
+
+    document
+        .querySelectorAll(
+            ".filter-pill"
+        )
+        .forEach(
+            function (pill) {
+
+                pill.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    /*
+     * Add active
+     */
+
+    if (button) {
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+
+    /*
+     * Get current restaurant foods
+     */
+
+    const restaurantFoods =
+        getRestaurantFoods();
+
+
+
+    /*
+     * ALL
+     */
+
+    if (
+        category ===
+        "All"
+    ) {
+
+        renderRestaurantFoods(
+            restaurantFoods
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+     * Category filtering
+     */
+
+    const filtered =
+        restaurantFoods.filter(
+            function (food) {
+
+                return (
+
+                    String(
+                        food.category || ""
+                    )
+                    .trim()
+                    .toLowerCase()
+
+                    ===
+
+                    String(
+                        category
+                    )
+                    .trim()
+                    .toLowerCase()
+
+                );
+
+            }
+        );
+
+
+    renderRestaurantFoods(
+        filtered
+    );
+
+}
+
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        console.log(
+            "======================================"
+        );
+
+        console.log(
+            "Food page loaded"
+        );
+
+
+        /*
+         * Load selected restaurant
+         */
+
+        loadRestaurant();
+
+
+        /*
+         * Update cart
+         */
+
+        if (
+            typeof updateCartCount ===
+            "function"
+        ) {
+
+            updateCartCount();
+
+        }
+
+
+        console.log(
+            "======================================"
+        );
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>

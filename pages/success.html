@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Order Confirmed | BiteWise</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           PROFESSIONAL SUCCESS PAGE
+        ===================================================== */
+
+        .success-section {
+            min-height: 78vh;
+            padding: 45px 0 70px;
+            background: #f7f7f7;
+        }
+
+
+        /* =====================================================
+           SUCCESS HERO
+        ===================================================== */
+
+        .success-hero {
+            background: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 24px;
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.06);
+            margin-bottom: 25px;
+        }
+
+
+        .success-icon {
+            width: 82px;
+            height: 82px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #eaf8ef;
+
+            color: #18a957;
+
+            font-size: 42px;
+            font-weight: 800;
+
+            animation: successPop 0.55s ease;
+        }
+
+
+        @keyframes successPop {
+
+            0% {
+                transform: scale(0.4);
+                opacity: 0;
+            }
+
+            70% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+        }
+
+
+        .success-tag {
+            display: inline-block;
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+
+            background: #fff3ed;
+
+            color: #ff5a1f;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 1px;
+        }
+
+
+        .success-hero h1 {
+            margin: 14px 0 8px;
+
+            font-size: 34px;
+
+            font-weight: 850;
+
+            color: #111827;
+        }
+
+
+        .success-message {
+            max-width: 570px;
+
+            margin: auto;
+
+            color: #6b7280;
+
+            font-size: 15px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =====================================================
+           ORDER ID
+        ===================================================== */
+
+        .order-id-box {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 20px;
+
+            padding: 10px 16px;
+
+            border-radius: 10px;
+
+            background: #fafafa;
+
+            border: 1px solid #e6e6e6;
+
+            font-size: 13px;
+
+            color: #777;
+        }
+
+
+        .order-id-box strong {
+            color: #ff5a1f;
+        }
+
+
+        /* =====================================================
+           MAIN GRID
+        ===================================================== */
+
+        .success-grid {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1fr)
+                360px;
+
+            gap: 25px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           CARDS
+        ===================================================== */
+
+        .success-info-card,
+        .success-summary-card {
+            background: #ffffff;
+
+            border: 1px solid #eeeeee;
+
+            border-radius: 20px;
+
+            padding: 24px;
+
+            box-shadow:
+                0 7px 25px rgba(0, 0, 0, 0.05);
+        }
+
+
+        .success-info-card {
+            margin-bottom: 20px;
+        }
+
+
+        .success-info-card h2,
+        .success-summary-card h2 {
+            margin: 0 0 20px;
+
+            font-size: 20px;
+
+            color: #111827;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           ORDER STATUS
+        ===================================================== */
+
+        .status-wrapper {
+            position: relative;
+
+            padding: 5px 0 3px;
+        }
+
+
+        .status-line {
+            position: absolute;
+
+            top: 21px;
+
+            left: 12%;
+
+            right: 12%;
+
+            height: 3px;
+
+            background: #e8e8e8;
+
+            z-index: 1;
+        }
+
+
+        .status-line-active {
+            position: absolute;
+
+            top: 21px;
+
+            left: 12%;
+
+            width: 25%;
+
+            height: 3px;
+
+            background: #ff5a1f;
+
+            z-index: 1;
+        }
+
+
+        .status-list {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .status-item {
+            text-align: center;
+        }
+
+
+        .status-circle {
+            width: 42px;
+            height: 42px;
+
+            margin: 0 auto 9px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #ff5a1f;
+
+            color: #ffffff;
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+            border: 4px solid #ffffff;
+
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+
+        .status-item.pending .status-circle {
+            background: #eeeeee;
+
+            color: #999999;
+        }
+
+
+        .status-item span {
+            display: block;
+
+            color: #555;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           DELIVERY DETAILS
+        ===================================================== */
+
+        .details-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 13px;
+        }
+
+
+        .detail-box {
+            padding: 15px;
+
+            border-radius: 12px;
+
+            background: #fafafa;
+
+            border: 1px solid #eeeeee;
+        }
+
+
+        .detail-box.full {
+            grid-column: 1 / -1;
+        }
+
+
+        .detail-label {
+            display: block;
+
+            margin-bottom: 5px;
+
+            color: #999;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        .detail-value {
+            color: #222;
+
+            font-size: 14px;
+
+            font-weight: 650;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           ORDER ITEMS
+        ===================================================== */
+
+        .order-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #eeeeee;
+        }
+
+
+        .order-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .order-item-image {
+            width: 65px;
+            height: 58px;
+
+            object-fit: cover;
+
+            border-radius: 11px;
+
+            flex-shrink: 0;
+
+            background: #eeeeee;
+        }
+
+
+        .order-item-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .order-item-info strong {
+            display: block;
+
+            color: #222;
+
+            font-size: 14px;
+
+            margin-bottom: 4px;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+
+        .order-item-info small {
+            color: #888;
+
+            font-size: 12px;
+        }
+
+
+        .order-item-price {
+            color: #111827;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        /* =====================================================
+           SUMMARY
+        ===================================================== */
+
+        .success-summary-card {
+            position: sticky;
+
+            top: 20px;
+        }
+
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 14px;
+
+            color: #6b7280;
+
+            font-size: 14px;
+        }
+
+
+        .summary-row strong {
+            color: #222;
+
+            font-weight: 700;
+        }
+
+
+        .discount {
+            color: #16a34a !important;
+        }
+
+
+        .success-summary-card hr {
+            border: none;
+
+            border-top: 1px solid #eeeeee;
+
+            margin: 18px 0;
+        }
+
+
+        .total-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+
+        .total-row span {
+            font-size: 17px;
+
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+
+        .total-row strong {
+            color: #ff5a1f;
+
+            font-size: 27px;
+
+            font-weight: 850;
+        }
+
+
+        /* =====================================================
+           PAYMENT BADGE
+        ===================================================== */
+
+        .payment-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 8px 11px;
+
+            margin-bottom: 20px;
+
+            border-radius: 9px;
+
+            background: #f3faf6;
+
+            color: #168a48;
+
+            font-size: 12px;
+
+            font-weight: 750;
+        }
+
+
+        /* =====================================================
+           ACTION BUTTONS
+        ===================================================== */
+
+        .success-buttons {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
+        }
+
+
+        .success-buttons a {
+            text-align: center;
+
+            text-decoration: none;
+
+            padding: 13px 10px;
+
+            border-radius: 11px;
+
+            font-size: 13px;
+
+            font-weight: 750;
+
+            transition: 0.2s ease;
+        }
+
+
+        .primary-success-btn {
+            background: #ff5a1f;
+
+            color: #ffffff;
+        }
+
+
+        .primary-success-btn:hover {
+            background: #e94c13;
+
+            transform: translateY(-1px);
+        }
+
+
+        .secondary-success-btn {
+            background: #ffffff;
+
+            color: #333333;
+
+            border: 1px solid #dddddd;
+        }
+
+
+        .secondary-success-btn:hover {
+            border-color: #ff5a1f;
+
+            color: #ff5a1f;
+
+            background: #fff8f4;
+        }
+
+
+        /* =====================================================
+           INFO MESSAGE
+        ===================================================== */
+
+        .success-note {
+            margin-top: 16px;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            background: #fafafa;
+
+            text-align: center;
+
+            color: #888;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 850px) {
+
+            .success-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .success-summary-card {
+                position: static;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .success-section {
+                padding: 30px 0 50px;
+            }
+
+
+            .success-hero {
+                padding: 30px 18px;
+            }
+
+
+            .success-hero h1 {
+                font-size: 27px;
+            }
+
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            .detail-box.full {
+                grid-column: auto;
+            }
+
+
+            .success-info-card,
+            .success-summary-card {
+                padding: 19px;
+            }
+
+
+            .status-item span {
+                font-size: 9px;
+            }
+
+
+            .status-circle {
+                width: 36px;
+                height: 36px;
+
+                font-size: 12px;
+            }
+
+
+            .status-line,
+            .status-line-active {
+                top: 18px;
+            }
+
+
+            .success-buttons {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="container nav-container">
+
+        <a
+            href="../index.html"
+            class="logo"
+        >
+            🍴 <span>BiteWise</span>
+        </a>
+
+
+        <nav class="nav">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+
+            <a href="shop.html">
+                Restaurants
+            </a>
+
+
+            <a href="cart.html">
+
+                Cart 🛒
+
+                <span
+                    id="cartCount"
+                    class="cart-count"
+                >
+                    0
+                </span>
+
+            </a>
+
+
+            <a href="../index.html#login">
+                Login
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+    <section class="success-section">
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 SUCCESS HERO
+            ================================================== -->
+
+            <div class="success-hero">
+
+                <div class="success-icon">
+                    ✓
+                </div>
+
+
+                <span class="success-tag">
+                    ORDER CONFIRMED
+                </span>
+
+
+                <h1>
+                    Order Placed Successfully! 🎉
+                </h1>
+
+
+                <p class="success-message">
+                    Thank you for ordering with BiteWise.
+                    Your food is being prepared and will
+                    be on its way soon.
+                </p>
+
+
+                <div class="order-id-box">
+
+                    Order ID
+
+                    <strong id="orderId">
+                        BW000000
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MAIN GRID
+            ================================================== -->
+
+            <div class="success-grid">
+
+
+                <!-- =================================================
+                     LEFT SIDE
+                ================================================== -->
+
+                <div>
+
+
+                    <!-- ORDER STATUS -->
+
+                    <div class="success-info-card">
+
+                        <h2>
+                            📦 Order Status
+                        </h2>
+
+
+                        <div class="status-wrapper">
+
+                            <div class="status-line"></div>
+
+                            <div class="status-line-active"></div>
+
+
+                            <div class="status-list">
+
+
+                                <div class="status-item">
+
+                                    <div class="status-circle">
+                                        ✓
+                                    </div>
+
+                                    <span>
+                                        Confirmed
+                                    </span>
+
+                                </div>
+
+
+                                <div class="status-item">
+
+                                    <div class="status-circle">
+                                        🍳
+                                    </div>
+
+                                    <span>
+                                        Preparing
+                                    </span>
+
+                                </div>
+
+
+                                <div class="status-item pending">
+
+                                    <div class="status-circle">
+                                        🛵
+                                    </div>
+
+                                    <span>
+                                        On the Way
+                                    </span>
+
+                                </div>
+
+
+                                <div class="status-item pending">
+
+                                    <div class="status-circle">
+                                        ✓
+                                    </div>
+
+                                    <span>
+                                        Delivered
+                                    </span>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DELIVERY DETAILS -->
+
+                    <div class="success-info-card">
+
+                        <h2>
+                            📍 Delivery Details
+                        </h2>
+
+
+                        <div class="details-grid">
+
+
+                            <div class="detail-box">
+
+                                <span class="detail-label">
+                                    Customer
+                                </span>
+
+                                <div
+                                    id="customerName"
+                                    class="detail-value"
+                                >
+                                    -
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="detail-box">
+
+                                <span class="detail-label">
+                                    Phone
+                                </span>
+
+                                <div
+                                    id="customerPhone"
+                                    class="detail-value"
+                                >
+                                    -
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="detail-box full">
+
+                                <span class="detail-label">
+                                    Delivery Address
+                                </span>
+
+                                <div
+                                    id="customerAddress"
+                                    class="detail-value"
+                                >
+                                    -
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="detail-box">
+
+                                <span class="detail-label">
+                                    City
+                                </span>
+
+                                <div
+                                    id="customerCity"
+                                    class="detail-value"
+                                >
+                                    -
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="detail-box">
+
+                                <span class="detail-label">
+                                    Payment Method
+                                </span>
+
+                                <div
+                                    id="paymentMethod"
+                                    class="detail-value"
+                                >
+                                    -
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ORDER ITEMS -->
+
+                    <div class="success-info-card">
+
+                        <h2>
+                            🍴 Your Order
+                        </h2>
+
+
+                        <div id="orderItems">
+
+                            <!-- Items loaded here -->
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =================================================
+                     RIGHT SIDE
+                ================================================== -->
+
+                <aside class="success-summary-card">
+
+                    <h2>
+                        Order Summary
+                    </h2>
+
+
+                    <div class="payment-badge">
+
+                        ✓ Payment Confirmed
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="successSubtotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery Fee
+                        </span>
+
+                        <strong id="successDelivery">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Discount
+                        </span>
+
+                        <strong
+                            id="successDiscount"
+                            class="discount"
+                        >
+                            - ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <div class="total-row">
+
+                        <span>
+                            Total Paid
+                        </span>
+
+                        <strong id="orderTotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <!-- BUTTONS -->
+
+                    <div class="success-buttons">
+
+                        <a
+                            href="shop.html"
+                            class="primary-success-btn"
+                        >
+                            🍴 Order More
+                        </a>
+
+
+                        <a
+                            href="../index.html"
+                            class="secondary-success-btn"
+                        >
+                            🏠 Home
+                        </a>
+
+                    </div>
+
+
+                    <div class="success-note">
+
+                        🔒 Your order details are saved
+                        securely for this session.
+
+                    </div>
+
+                </aside>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+
+            <div>
+
+                <h3>
+                    🍴 BiteWise
+                </h3>
+
+                <p>
+                    Compare food. Save money. Eat smarter.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Quick Links
+                </h4>
+
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+
+                <a href="shop.html">
+                    Restaurants
+                </a>
+
+
+                <a href="cart.html">
+                    Cart
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 BiteWise. All rights reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     MAIN SCRIPT
+===================================================== -->
+
+<script src="../js/script.js"></script>
+
+
+<script>
+
+/* =====================================================
+   LOAD ORDER
+===================================================== */
+
+function loadOrderDetails() {
+
+    const orderData =
+        localStorage.getItem(
+            "bitewiseOrder"
+        );
+
+
+    if (!orderData) {
+
+        document.getElementById(
+            "orderId"
+        ).textContent =
+            "Not available";
+
+        document.getElementById(
+            "orderItems"
+        ).innerHTML = `
+
+            <div
+                style="
+                    text-align:center;
+                    padding:25px;
+                    color:#777;
+                "
+            >
+
+                <div
+                    style="
+                        font-size:40px;
+                        margin-bottom:10px;
+                    "
+                >
+                    🛒
+                </div>
+
+                <p>
+                    No recent order found.
+                </p>
+
+                <br>
+
+                <a
+                    href="shop.html"
+                    class="btn btn-primary"
+                >
+                    Browse Food
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    let order;
+
+    try {
+
+        order =
+            JSON.parse(
+                orderData
+            );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Order parsing error:",
+            error
+        );
+
+        return;
+
+    }
+
+
+
+    /* =================================================
+       BASIC DETAILS
+    ================================================== */
+
+    document.getElementById(
+        "orderId"
+    ).textContent =
+        order.orderId ||
+        "BW000000";
+
+
+    document.getElementById(
+        "customerName"
+    ).textContent =
+        order.customerName ||
+        "-";
+
+
+    document.getElementById(
+        "customerPhone"
+    ).textContent =
+        order.phone ||
+        "-";
+
+
+    document.getElementById(
+        "customerAddress"
+    ).textContent =
+        order.address ||
+        "-";
+
+
+    document.getElementById(
+        "customerCity"
+    ).textContent =
+        order.city ||
+        "-";
+
+
+    document.getElementById(
+        "paymentMethod"
+    ).textContent =
+        order.paymentMethod ||
+        "-";
+
+
+
+    /* =================================================
+       TOTALS
+    ================================================== */
+
+    document.getElementById(
+        "successSubtotal"
+    ).textContent =
+        `₹${Number(
+            order.subtotal || 0
+        )}`;
+
+
+    document.getElementById(
+        "successDelivery"
+    ).textContent =
+        `₹${Number(
+            order.deliveryFee || 0
+        )}`;
+
+
+    document.getElementById(
+        "successDiscount"
+    ).textContent =
+        `- ₹${Number(
+            order.discount || 0
+        )}`;
+
+
+    document.getElementById(
+        "orderTotal"
+    ).textContent =
+        `₹${Number(
+            order.total || 0
+        )}`;
+
+
+
+    /* =================================================
+       ITEMS
+    ================================================== */
+
+    renderOrderItems(
+        order.items || []
+    );
+
+}
+
+
+
+/* =====================================================
+   RENDER ITEMS
+===================================================== */
+
+function renderOrderItems(items) {
+
+    const container =
+        document.getElementById(
+            "orderItems"
+        );
+
+
+    if (!Array.isArray(items) ||
+        items.length === 0) {
+
+        container.innerHTML = `
+
+            <p
+                style="
+                    color:#777;
+                    padding:10px 0;
+                "
+            >
+                No item information available.
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML = "";
+
+
+    items.forEach(
+        function (item) {
+
+            const name =
+                item.name ||
+                item.foodName ||
+                "Food Item";
+
+
+            const restaurant =
+                item.restaurant ||
+                item.restaurantName ||
+                "BiteWise";
+
+
+            const price =
+                Number(
+                    item.price ||
+                    item.foodPrice ||
+                    0
+                );
+
+
+            const quantity =
+                Number(
+                    item.quantity || 1
+                );
+
+
+            const itemTotal =
+                price * quantity;
+
+
+            const image =
+                item.image ||
+                "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80";
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "order-item";
+
+
+            div.innerHTML = `
+
+                <img
+                    src="${image}"
+                    alt="${name}"
+                    class="order-item-image"
+                    onerror="
+                        this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80'
+                    "
+                >
+
+
+                <div class="order-item-info">
+
+                    <strong>
+                        ${name}
+                    </strong>
+
+                    <small>
+                        ${restaurant}
+                        •
+                        ${quantity} × ₹${price}
+                    </small>
+
+                </div>
+
+
+                <strong class="order-item-price">
+                    ₹${itemTotal}
+                </strong>
+
+            `;
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   CLEAR CART
+===================================================== */
+
+function clearCartAfterOrder() {
+
+    localStorage.removeItem(
+        "bitewiseCart"
+    );
+
+
+    if (
+        typeof cart !==
+        "undefined"
+    ) {
+
+        cart.length = 0;
+
+    }
+
+
+    if (
+        typeof updateCartCount ===
+        "function"
+    ) {
+
+        updateCartCount();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        loadOrderDetails();
+
+        clearCartAfterOrder();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compare Food - BiteWise</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* =========================
+           BITEWISE COMPARISON PAGE
+           ========================= */
+
+        .compare-page {
+            padding: 50px 0 80px;
+        }
+
+        .compare-top {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .compare-top h1 {
+            margin: 10px 0;
+        }
+
+        .compare-top p {
+            color: #777;
+        }
+
+        /* Selected Food */
+
+        .selected-food-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+
+            padding: 25px;
+            margin-bottom: 30px;
+
+            background: #fff;
+            border-radius: 18px;
+
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+        }
+
+        .selected-food-info h2 {
+            margin-bottom: 8px;
+        }
+
+        .selected-food-info p {
+            color: #777;
+        }
+
+        .selected-price {
+            font-size: 25px;
+            font-weight: 700;
+            color: #ff6b00;
+        }
+
+        /* Comparison Cards */
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .compare-platform {
+            position: relative;
+
+            background: #fff;
+            border-radius: 20px;
+
+            padding: 25px;
+
+            border: 1px solid #eee;
+
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+
+            transition: 0.3s;
+        }
+
+        .compare-platform:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.10);
+        }
+
+        .best-platform {
+            border: 2px solid #ff6b00;
+        }
+
+        .best-badge {
+            position: absolute;
+
+            top: -12px;
+            right: 20px;
+
+            background: #ff6b00;
+            color: white;
+
+            padding: 6px 14px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 25px;
+        }
+
+        .platform-logo {
+            width: 45px;
+            height: 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: #f5f5f5;
+
+            font-size: 23px;
+        }
+
+        .platform-header h3 {
+            margin: 0;
+        }
+
+        .platform-header span {
+            font-size: 13px;
+            color: #777;
+        }
+
+        .compare-row {
+            display: flex;
+            justify-content: space-between;
+
+            padding: 13px 0;
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .compare-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .compare-label {
+            color: #777;
+        }
+
+        .compare-value {
+            font-weight: 600;
+        }
+
+        .final-price {
+            font-size: 23px;
+            color: #ff6b00;
+        }
+
+        .saving-box {
+            margin: 20px 0;
+
+            padding: 12px;
+
+            text-align: center;
+
+            background: #f0fff4;
+
+            color: #16833b;
+
+            border-radius: 10px;
+
+            font-weight: 700;
+        }
+
+        .choose-btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Smart Recommendation */
+
+        .smart-recommendation {
+            margin-top: 40px;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            background: linear-gradient(
+                135deg,
+                #fff7ed,
+                #fff
+            );
+
+            border: 1px solid #ffe0c2;
+
+            text-align: center;
+        }
+
+        .smart-recommendation h2 {
+            margin: 10px 0;
+        }
+
+        .recommendation-price {
+            font-size: 30px;
+            font-weight: 800;
+            color: #ff6b00;
+        }
+
+        .save-highlight {
+            color: #16833b;
+            font-weight: 700;
+        }
+
+        /* Disclaimer */
+
+        .comparison-note {
+            margin-top: 25px;
+
+            text-align: center;
+
+            color: #888;
+
+            font-size: 13px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 900px) {
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .selected-food-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .compare-page {
+                padding-top: 30px;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================
+         HEADER
+         ========================= -->
+
+    <header class="header">
+
+        <div class="container nav-container">
+
+            <a href="../index.html" class="logo">
+                🍴 <span>BiteWise</span>
+            </a>
+
+            <nav class="nav">
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="shop.html">
+                    Restaurants
+                </a>
+
+                <a href="cart.html">
+                    Cart 🛒
+                    <span id="cartCount"
+                          class="cart-count">
+                        0
+                    </span>
+                </a>
+
+                <a href="../index.html#login">
+                    Login
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+         ========================= -->
+
+    <main>
+
+        <section class="compare-page">
+
+            <div class="container">
+
+                <!-- Heading -->
+
+                <div class="compare-top">
+
+                    <span class="section-tag">
+                        BITEWISE SMART COMPARE
+                    </span>
+
+                    <h1>
+                        Compare Before You Order ⚖️
+                    </h1>
+
+                    <p>
+                        Same food. Different platforms.
+                        Find the best deal with BiteWise.
+                    </p>
+
+                </div>
+
+
+                <!-- Selected Food -->
+
+                <div
+                    id="selectedFoodBox"
+                    class="selected-food-box">
+
+                    <div class="selected-food-info">
+
+                        <h2 id="foodName">
+                            Samosa
+                        </h2>
+
+                        <p id="foodRestaurant">
+                            A2B
+                        </p>
+
+                    </div>
+
+                    <div
+                        id="originalPrice"
+                        class="selected-price">
+
+                        ₹25
+
+                    </div>
+
+                </div>
+
+
+                <!-- Comparison -->
+
+                <div
+                    id="comparisonGrid"
+                    class="comparison-grid">
+
+                    <!-- JavaScript will insert cards -->
+
+                </div>
+
+
+                <!-- Smart Recommendation -->
+
+                <div
+                    id="smartRecommendation"
+                    class="smart-recommendation">
+
+                    <!-- JavaScript -->
+
+                </div>
+
+
+                <p class="comparison-note">
+
+                    * Prices and delivery details shown here
+                    are sample comparison data for the BiteWise demo.
+
+                </p>
+
+
+                <div style="text-align:center; margin-top:30px;">
+
+                    <a
+                        href="shop.html"
+                        class="btn btn-outline">
+
+                        ← Back to Restaurants
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-content">
+
+                <div>
+
+                    <h3>
+                        🍴 BiteWise
+                    </h3>
+
+                    <p>
+                        Compare food. Save money.
+                        Eat smarter.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <h4>
+                        Quick Links
+                    </h4>
+
+                    <a href="../index.html">
+                        Home
+                    </a>
+
+                    <a href="shop.html">
+                        Restaurants
+                    </a>
+
+                    <a href="cart.html">
+                        Cart
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © 2026 BiteWise. All rights reserved.
+                </p>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <div id="toast" class="toast"></div>
+
+
+    <script src="../js/script.js"></script>
+
+
+    <script>
+
+        /* =========================
+           SELECTED FOOD
+           ========================= */
+
+        let selectedFood = null;
+
+
+        /* =========================
+           DEMO PLATFORM DATA
+           ========================= */
+
+        function createPlatformData(food) {
+
+            const basePrice =
+                Number(food.price) || 25;
+
+
+            return [
+
+                {
+                    name: "Zomato",
+                    icon: "🟠",
+                    foodPrice: basePrice + 5,
+                    deliveryFee: 25,
+                    offer: 10,
+                    rating: 4.5,
+                    deliveryTime: "30 min"
+                },
+
+                {
+                    name: "Swiggy",
+                    icon: "🔴",
+                    foodPrice: basePrice + 3,
+                    deliveryFee: 20,
+                    offer: 8,
+                    rating: 4.6,
+                    deliveryTime: "25 min"
+                },
+
+                {
+                    name: food.restaurant || "Restaurant Direct",
+                    icon: "🟢",
+                    foodPrice: basePrice,
+                    deliveryFee: 0,
+                    offer: 0,
+                    rating: food.rating || 4.7,
+                    deliveryTime: food.delivery || "35 min"
+                }
+
+            ];
+
+        }
+
+
+        /* =========================
+           FINAL PRICE
+           ========================= */
+
+        function calculateFinalPrice(platform) {
+
+            return (
+                platform.foodPrice +
+                platform.deliveryFee -
+                platform.offer
+            );
+
+        }
+
+
+        /* =========================
+           RENDER COMPARISON
+           ========================= */
+
+        function renderComparison() {
+
+            const grid =
+                document.getElementById(
+                    "comparisonGrid"
+                );
+
+
+            const platforms =
+                createPlatformData(selectedFood);
+
+
+            /* Find cheapest */
+
+            const finalPrices =
+                platforms.map(
+                    calculateFinalPrice
+                );
+
+
+            const lowestPrice =
+                Math.min(...finalPrices);
+
+
+            grid.innerHTML = "";
+
+
+            platforms.forEach(function(platform) {
+
+                const finalPrice =
+                    calculateFinalPrice(platform);
+
+
+                const saving =
+                    finalPrices[0] -
+                    finalPrice;
+
+
+                const isBest =
+                    finalPrice === lowestPrice;
+
+
+                const card =
+                    document.createElement("div");
+
+
+                card.className =
+                    "compare-platform" +
+                    (isBest
+                        ? " best-platform"
+                        : "");
+
+
+                card.innerHTML = `
+
+                    ${
+                        isBest
+                        ? `
+                            <div class="best-badge">
+                                🏆 BEST VALUE
+                            </div>
+                          `
+                        : ""
+                    }
+
+
+                    <div class="platform-header">
+
+                        <div class="platform-logo">
+                            ${platform.icon}
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                ${platform.name}
+                            </h3>
+
+                            <span>
+                                Available option
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="compare-row">
+
+                        <span class="compare-label">
+                            Food Price
+                        </span>
+
+                        <span class="compare-value">
+                            ₹${platform.foodPrice}
+                        </span>
+
+                    </div>
+
+
+                    <div class="compare-row">
+
+                        <span class="compare-label">
+                            Delivery Fee
+                        </span>
+
+                        <span class="compare-value">
+                            ₹${platform.deliveryFee}
+                        </span>
+
+                    </div>
+
+
+                    <div class="compare-row">
+
+                        <span class="compare-label">
+                            Offer
+                        </span>
+
+                        <span class="compare-value">
+                            - ₹${platform.offer}
+                        </span>
+
+                    </div>
+
+
+                    <div class="compare-row">
+
+                        <span class="compare-label">
+                            ⭐ Rating
+                        </span>
+
+                        <span class="compare-value">
+                            ${platform.rating}
+                        </span>
+
+                    </div>
+
+
+                    <div class="compare-row">
+
+                        <span class="compare-label">
+                            🚴 Delivery
+                        </span>
+
+                        <span class="compare-value">
+                            ${platform.deliveryTime}
+                        </span>
+
+                    </div>
+
+
+                    <div class="compare-row">
+
+                        <span class="compare-label">
+                            Final Price
+                        </span>
+
+                        <span class="compare-value final-price">
+                            ₹${finalPrice}
+                        </span>
+
+                    </div>
+
+
+                    ${
+                        saving > 0
+                        ? `
+                            <div class="saving-box">
+                                💰 Save ₹${saving}
+                            </div>
+                          `
+                        : `
+                            <div class="saving-box">
+                                Best reference price
+                            </div>
+                          `
+                    }
+
+
+                    <button
+                        class="btn btn-primary choose-btn"
+                        onclick="choosePlatform(
+                            '${platform.name}',
+                            ${finalPrice}
+                        )">
+
+                        Order from ${platform.name}
+
+                    </button>
+
+                `;
+
+
+                grid.appendChild(card);
+
+            });
+
+
+            /* Smart recommendation */
+
+            const bestIndex =
+                finalPrices.indexOf(
+                    lowestPrice
+                );
+
+
+            const best =
+                platforms[bestIndex];
+
+
+            const saving =
+                finalPrices[0] -
+                lowestPrice;
+
+
+            document.getElementById(
+                "smartRecommendation"
+            ).innerHTML = `
+
+                <span class="section-tag">
+                    🧠 BITEWISE RECOMMENDATION
+                </span>
+
+                <h2>
+                    Best value for your money
+                </h2>
+
+                <p>
+                    For
+                    <strong>
+                        ${selectedFood.name}
+                    </strong>,
+                    BiteWise recommends
+                </p>
+
+                <h3>
+                    🏆 ${best.name}
+                </h3>
+
+                <div class="recommendation-price">
+                    ₹${lowestPrice}
+                </div>
+
+                ${
+                    saving > 0
+                    ? `
+                        <p class="save-highlight">
+                            💰 You save ₹${saving}
+                            compared with the first option
+                        </p>
+                      `
+                    : ""
+                }
+
+                <p>
+                    ⭐ ${best.rating}
+                    &nbsp; • &nbsp;
+                    🚴 ${best.deliveryTime}
+                </p>
+
+            `;
+
+        }
+
+
+        /* =========================
+           CHOOSE PLATFORM
+           ========================= */
+
+        function choosePlatform(
+            platformName,
+            price
+        ) {
+
+            const cartItem = {
+
+                id:
+                    selectedFood.id +
+                    "-" +
+                    platformName
+                        .toLowerCase()
+                        .replace(/\s+/g, "-"),
+
+                name:
+                    selectedFood.name,
+
+                restaurant:
+                    platformName,
+
+                price:
+                    price,
+
+                rating:
+                    selectedFood.rating || 4.5,
+
+                delivery:
+                    selectedFood.delivery || "30 min",
+
+                quantity: 1
+
+            };
+
+
+            addToCart(cartItem);
+
+
+            showToast(
+                `${selectedFood.name} added to cart!`
+            );
+
+        }
+
+
+        /* =========================
+           LOAD FOOD
+           ========================= */
+
+        function loadSelectedFood() {
+
+            const saved =
+                localStorage.getItem(
+                    "bitewiseCompareFood"
+                );
+
+
+            if (!saved) {
+
+                document.getElementById(
+                    "foodName"
+                ).textContent =
+                    "No food selected";
+
+                document.getElementById(
+                    "foodRestaurant"
+                ).textContent =
+                    "Please select a food item first.";
+
+                document.getElementById(
+                    "originalPrice"
+                ).textContent =
+                    "₹0";
+
+                return;
+
+            }
+
+
+            selectedFood =
+                JSON.parse(saved);
+
+
+            document.getElementById(
+                "foodName"
+            ).textContent =
+                selectedFood.name;
+
+
+            document.getElementById(
+                "foodRestaurant"
+            ).textContent =
+                selectedFood.restaurant;
+
+
+            document.getElementById(
+                "originalPrice"
+            ).textContent =
+                `₹${selectedFood.price}`;
+
+
+            renderComparison();
+
+        }
+
+
+        /* =========================
+           PAGE LOAD
+           ========================= */
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function() {
+
+                updateCartCount();
+
+                loadSelectedFood();
+
+            }
+        );
+
+    </script>
+
+</body>
+</html>

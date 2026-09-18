@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>BiteWise | Restaurants</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="container nav">
+
+
+        <!-- LOGO -->
+
+        <div
+            onclick="window.location.href='../index.html'"
+            style="cursor:pointer"
+        >
+
+            <div class="logo">
+                Bite<span>Wise</span>
+            </div>
+
+            <div class="tagline">
+                SMART FOOD • SMART CHOICE
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <div class="nav-links">
+
+            <button
+                onclick="window.location.href='../index.html'"
+            >
+                Home
+            </button>
+
+
+            <button
+                onclick="window.location.href='shop.html'"
+            >
+                Restaurants
+            </button>
+
+
+            <button
+                class="cart-btn"
+                onclick="window.location.href='cart.html'"
+            >
+
+                Cart
+
+                <span
+                    id="cartCount"
+                    class="cart-count"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+            <button
+                onclick="window.location.href='login.html'"
+            >
+                Login
+            </button>
+
+        </div>
+
+
+
+        <!-- MOBILE MENU -->
+
+        <button
+            class="mobile-menu"
+            onclick="window.location.href='../index.html'"
+        >
+            ☰
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+    <!-- =================================================
+         PAGE TOP
+    ================================================== -->
+
+    <section class="page-top">
+
+        <div class="container">
+
+
+            <h1 class="section-title">
+
+                Explore
+                <span>
+                    Restaurants
+                </span>
+
+            </h1>
+
+
+            <p class="section-subtitle">
+
+                Find your favourite restaurant
+                and discover the best food deals.
+
+            </p>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="page-search">
+
+                <input
+                    type="text"
+                    id="shopSearch"
+                    placeholder="Search restaurant or food..."
+                    onkeyup="searchShop()"
+                >
+
+
+                <button
+                    type="button"
+                    onclick="searchShop()"
+                >
+                    Search
+                </button>
+
+            </div>
+
+
+
+            <!-- CATEGORY FILTER -->
+
+            <div class="food-filter">
+
+
+                <button
+                    type="button"
+                    class="filter-pill active"
+                    onclick="shopFilter('All', this)"
+                >
+                    All
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="shopFilter('Biryani', this)"
+                >
+                    Biryani
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="shopFilter('South Indian', this)"
+                >
+                    South Indian
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="shopFilter('North Indian', this)"
+                >
+                    North Indian
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="shopFilter('Pizza', this)"
+                >
+                    Pizza
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="shopFilter('Burger', this)"
+                >
+                    Burger
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="shopFilter('Chinese', this)"
+                >
+                    Chinese
+                </button>
+
+
+                <button
+                    type="button"
+                    class="filter-pill"
+                    onclick="shopFilter('Dessert', this)"
+                >
+                    Dessert
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         RESTAURANTS
+    ================================================== -->
+
+    <section style="padding-top:20px;">
+
+        <div class="container">
+
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2 class="section-title">
+
+                        Popular
+                        <span>
+                            Restaurants
+                        </span>
+
+                    </h2>
+
+
+                    <p
+                        class="section-subtitle"
+                        id="resultText"
+                    >
+                        Loading restaurants...
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="shopRestaurants"
+                class="restaurant-grid"
+            >
+
+                <!-- Restaurants loaded from backend -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FOOD MENU
+    ================================================== -->
+
+    <section>
+
+        <div class="container">
+
+
+            <div class="section-head">
+
+                <div>
+
+                    <h2 class="section-title">
+
+                        Popular
+                        <span>
+                            Food
+                        </span>
+
+                    </h2>
+
+
+                    <p class="section-subtitle">
+
+                        Compare prices and
+                        add your favourite food.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div
+                id="shopFoods"
+                class="food-grid"
+            >
+
+                <!-- Foods loaded from backend -->
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="container">
+
+
+        <div class="footer-grid">
+
+
+            <!-- ABOUT -->
+
+            <div>
+
+                <div class="footer-logo">
+                    BiteWise
+                </div>
+
+
+                <p>
+
+                    Smart food ordering with
+                    intelligent price comparison.
+
+                    Compare. Save. Order.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- EXPLORE -->
+
+            <div>
+
+                <h4>
+                    Explore
+                </h4>
+
+
+                <ul>
+
+                    <li
+                        onclick="window.location.href='../index.html'"
+                    >
+                        Home
+                    </li>
+
+
+                    <li
+                        onclick="window.location.href='shop.html'"
+                    >
+                        Restaurants
+                    </li>
+
+
+                    <li>
+                        Categories
+                    </li>
+
+
+                    <li>
+                        Deals
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- BITEWISE -->
+
+            <div>
+
+                <h4>
+                    BiteWise
+                </h4>
+
+
+                <ul>
+
+                    <li>
+                        About
+                    </li>
+
+
+                    <li>
+                        Features
+                    </li>
+
+
+                    <li>
+                        How it works
+                    </li>
+
+
+                    <li>
+                        Contact
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <!-- SUPPORT -->
+
+            <div>
+
+                <h4>
+                    Support
+                </h4>
+
+
+                <ul>
+
+                    <li>
+                        Help Center
+                    </li>
+
+
+                    <li>
+                        Privacy
+                    </li>
+
+
+                    <li>
+                        Terms
+                    </li>
+
+
+                    <li>
+                        Feedback
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- COPYRIGHT -->
+
+        <div class="copyright">
+
+            © 2026 BiteWise —
+            Smart Food. Smart Choice.
+
+        </div>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div id="toast">
+    Message
+</div>
+
+
+
+<!-- =====================================================
+     MAIN JAVASCRIPT
+===================================================== -->
+
+<script src="../js/script.js"></script>
+
+<script>
+document.addEventListener("click", function (e) {
+
+    const card = e.target.closest(".restaurant-card");
+
+    if (!card) return;
+
+    console.log("RESTAURANT CARD CLICKED");
+
+    window.location.href = "food.html";
+
+});
+</script>
+
+</body>
+
+</html>

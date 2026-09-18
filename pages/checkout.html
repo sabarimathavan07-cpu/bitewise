@@ -1,0 +1,2137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout | BiteWise</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           BITEWISE PROFESSIONAL CHECKOUT
+        ===================================================== */
+
+        .checkout-page {
+            background: #f7f7f7;
+            min-height: 70vh;
+            padding: 42px 0 70px;
+        }
+
+        .checkout-page-header {
+            margin-bottom: 30px;
+        }
+
+        .checkout-page-header .section-tag {
+            color: #ff5a1f;
+            font-size: 13px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .checkout-page-header h1 {
+            margin: 8px 0 6px;
+            color: #111827;
+            font-size: 36px;
+            font-weight: 850;
+        }
+
+        .checkout-page-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+        /* CHECKOUT STEPS */
+
+        .checkout-steps {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 28px;
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        .checkout-step {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #9ca3af;
+        }
+
+        .checkout-step.active {
+            color: #ff5a1f;
+        }
+
+        .step-number {
+            width: 27px;
+            height: 27px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eeeeee;
+            color: #777777;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .checkout-step.active .step-number {
+            background: #ff5a1f;
+            color: white;
+        }
+
+        .step-line {
+            width: 35px;
+            height: 1px;
+            background: #dddddd;
+        }
+
+        /* MAIN LAYOUT */
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 390px;
+            gap: 28px;
+            align-items: start;
+        }
+
+        .checkout-form {
+            min-width: 0;
+        }
+
+        /* CARD */
+
+        .checkout-card {
+            background: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .checkout-card h2 {
+            margin: 0 0 22px;
+            color: #111827;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        /* FORM */
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #374151;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .checkout-card input,
+        .checkout-card textarea {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid #dddddd;
+            border-radius: 10px;
+            padding: 12px 13px;
+            background: #fafafa;
+            color: #111827;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .checkout-card input:focus,
+        .checkout-card textarea:focus {
+            background: #ffffff;
+            border-color: #ff5a1f;
+            box-shadow:
+                0 0 0 3px rgba(255, 90, 31, 0.10);
+        }
+
+        .checkout-card textarea {
+            resize: vertical;
+            min-height: 105px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* PAYMENT */
+
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .payment-option {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .payment-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .payment-option-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 90px;
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #dddddd;
+            border-radius: 13px;
+            background: #ffffff;
+            color: #444444;
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .payment-option-content:hover {
+            border-color: #ffb092;
+            transform: translateY(-1px);
+        }
+
+        .payment-icon {
+            font-size: 25px;
+        }
+
+        .payment-option-title {
+            font-size: 13px;
+            font-weight: 750;
+        }
+
+        .payment-option input:checked
+        + .payment-option-content {
+            border: 2px solid #ff5a1f;
+            background: #fff6f1;
+            color: #ff5a1f;
+        }
+
+        .payment-details {
+            padding: 16px;
+            border-radius: 12px;
+            background: #fafafa;
+            border: 1px solid #eeeeee;
+        }
+
+        /* SUMMARY */
+
+        .checkout-summary {
+            background: #ffffff;
+            border: 1px solid #eeeeee;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow:
+                0 8px 28px rgba(0, 0, 0, 0.07);
+            position: sticky;
+            top: 20px;
+        }
+
+        .checkout-summary h2 {
+            margin: 0 0 20px;
+            color: #111827;
+            font-size: 22px;
+            font-weight: 850;
+        }
+
+        #checkoutItems {
+            max-height: 330px;
+            overflow-y: auto;
+            padding-right: 3px;
+        }
+
+        .summary-item {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-food-image {
+            width: 58px;
+            height: 52px;
+            flex-shrink: 0;
+            object-fit: cover;
+            border-radius: 9px;
+            background: #eeeeee;
+        }
+
+        .summary-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .summary-item-info strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #222222;
+            font-size: 13px;
+            font-weight: 750;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .summary-item-info small {
+            color: #888888;
+            font-size: 11px;
+        }
+
+        .summary-item-price {
+            color: #111827;
+            font-size: 14px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .checkout-summary hr {
+            border: none;
+            border-top: 1px solid #eeeeee;
+            margin: 19px 0;
+        }
+
+        .checkout-summary .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .checkout-summary .summary-row strong {
+            color: #222222;
+            font-weight: 700;
+        }
+
+        #checkoutDiscount {
+            color: #16a34a !important;
+        }
+
+        .checkout-summary .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 5px;
+            margin-bottom: 20px;
+        }
+
+        .checkout-summary .summary-total span {
+            color: #111827;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        .checkout-summary .summary-total strong {
+            color: #ff5a1f;
+            font-size: 27px;
+            font-weight: 850;
+        }
+
+        /* PLACE ORDER */
+
+        .place-order-btn {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 18px;
+            background: #ff5a1f;
+            color: #ffffff;
+            font-family: inherit;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            transition:
+                background 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .place-order-btn:hover {
+            background: #e94b12;
+            transform: translateY(-1px);
+            box-shadow:
+                0 8px 20px rgba(255, 90, 31, 0.25);
+        }
+
+        .place-order-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .back-cart-btn {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 11px;
+            padding: 12px;
+            border: 1px solid #dddddd;
+            border-radius: 12px;
+            background: #ffffff;
+            color: #333333;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 650;
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                color 0.2s ease;
+        }
+
+        .back-cart-btn:hover {
+            background: #fff7f3;
+            border-color: #ff5a1f;
+            color: #ff5a1f;
+        }
+
+        .checkout-security {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-top: 16px;
+            color: #888888;
+            font-size: 11px;
+        }
+
+        .checkout-empty {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        .checkout-empty-icon {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        .checkout-empty h3 {
+            margin: 0 0 6px;
+            color: #222222;
+            font-size: 18px;
+        }
+
+        .checkout-empty p {
+            margin: 0 0 15px;
+            color: #888888;
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 950px) {
+
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .checkout-summary {
+                position: static;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            .checkout-page {
+                padding: 30px 0 50px;
+            }
+
+            .checkout-page-header h1 {
+                font-size: 29px;
+            }
+
+            .checkout-steps {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 4px;
+            }
+
+            .checkout-card {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-option-content {
+                flex-direction: row;
+                justify-content: flex-start;
+                min-height: auto;
+                text-align: left;
+            }
+
+            .checkout-summary {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="container nav-container">
+
+        <a
+            href="../index.html"
+            class="logo"
+        >
+            🍴 <span>BiteWise</span>
+        </a>
+
+        <nav class="nav">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+            <a href="shop.html">
+                Restaurants
+            </a>
+
+            <a href="cart.html">
+
+                Cart 🛒
+
+                <span
+                    id="cartCount"
+                    class="cart-count"
+                >
+                    0
+                </span>
+
+            </a>
+
+            <a href="../index.html#login">
+                Login
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+    <section class="checkout-page">
+
+        <div class="container">
+
+            <div class="checkout-page-header">
+
+                <span class="section-tag">
+                    CHECKOUT
+                </span>
+
+                <h1>
+                    Complete Your Order
+                </h1>
+
+                <p>
+                    Just a few details and your food will be on its way.
+                </p>
+
+            </div>
+
+
+            <!-- CHECKOUT STEPS -->
+
+            <div class="checkout-steps">
+
+                <div class="checkout-step active">
+
+                    <span class="step-number">
+                        1
+                    </span>
+
+                    Delivery
+
+                </div>
+
+                <span class="step-line"></span>
+
+                <div class="checkout-step active">
+
+                    <span class="step-number">
+                        2
+                    </span>
+
+                    Payment
+
+                </div>
+
+                <span class="step-line"></span>
+
+                <div class="checkout-step">
+
+                    <span class="step-number">
+                        3
+                    </span>
+
+                    Confirmation
+
+                </div>
+
+            </div>
+
+
+            <!-- CHECKOUT LAYOUT -->
+
+            <div class="checkout-layout">
+
+
+                <!-- LEFT -->
+
+                <div class="checkout-form">
+
+
+                    <!-- DELIVERY -->
+
+                    <div class="checkout-card">
+
+                        <h2>
+                            📍 Delivery Details
+                        </h2>
+
+                        <div class="form-group">
+
+                            <label for="customerName">
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                id="customerName"
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="phone">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Enter your 10-digit phone number"
+                                maxlength="10"
+                                autocomplete="tel"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="address">
+                                Delivery Address
+                            </label>
+
+                            <textarea
+                                id="address"
+                                rows="4"
+                                placeholder="House / Door No, Street, Area"
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="city">
+                                    City
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    placeholder="Enter city"
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="pincode">
+                                    Pincode
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="pincode"
+                                    placeholder="6-digit pincode"
+                                    maxlength="6"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PAYMENT -->
+
+                    <div class="checkout-card">
+
+                        <h2>
+                            💳 Payment Method
+                        </h2>
+
+
+                        <div class="payment-options">
+
+
+                            <label class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="payment"
+                                    value="UPI"
+                                    checked
+                                >
+
+                                <span class="payment-option-content">
+
+                                    <span class="payment-icon">
+                                        📱
+                                    </span>
+
+                                    <span class="payment-option-title">
+                                        UPI
+                                    </span>
+
+                                </span>
+
+                            </label>
+
+
+                            <label class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="payment"
+                                    value="Card"
+                                >
+
+                                <span class="payment-option-content">
+
+                                    <span class="payment-icon">
+                                        💳
+                                    </span>
+
+                                    <span class="payment-option-title">
+                                        Card
+                                    </span>
+
+                                </span>
+
+                            </label>
+
+
+                            <label class="payment-option">
+
+                                <input
+                                    type="radio"
+                                    name="payment"
+                                    value="Cash on Delivery"
+                                >
+
+                                <span class="payment-option-content">
+
+                                    <span class="payment-icon">
+                                        💵
+                                    </span>
+
+                                    <span class="payment-option-title">
+                                        Cash on Delivery
+                                    </span>
+
+                                </span>
+
+                            </label>
+
+                        </div>
+
+
+                        <!-- UPI -->
+
+                        <div
+                            id="upiDetails"
+                            class="payment-details"
+                        >
+
+                            <div class="form-group">
+
+                                <label for="upiId">
+                                    UPI ID
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="upiId"
+                                    placeholder="example@upi"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- CARD -->
+
+                        <div
+                            id="cardDetails"
+                            class="payment-details"
+                            style="display:none;"
+                        >
+
+                            <div class="form-group">
+
+                                <label for="cardNumber">
+                                    Card Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="cardNumber"
+                                    maxlength="19"
+                                    placeholder="XXXX XXXX XXXX XXXX"
+                                >
+
+                            </div>
+
+
+                            <div class="form-row">
+
+                                <div class="form-group">
+
+                                    <label for="expiry">
+                                        Expiry
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="expiry"
+                                        maxlength="5"
+                                        placeholder="MM/YY"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label for="cvv">
+                                        CVV
+                                    </label>
+
+                                    <input
+                                        type="password"
+                                        id="cvv"
+                                        maxlength="3"
+                                        placeholder="CVV"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- RIGHT -->
+
+                <aside class="checkout-summary">
+
+                    <h2>
+                        Order Summary
+                    </h2>
+
+
+                    <div id="checkoutItems">
+                    </div>
+
+
+                    <hr>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="checkoutSubtotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery Fee
+                        </span>
+
+                        <strong id="checkoutDelivery">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Discount
+                        </span>
+
+                        <strong id="checkoutDiscount">
+                            - ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <hr>
+
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="checkoutTotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        id="placeOrderButton"
+                        class="place-order-btn"
+                        type="button"
+                        onclick="submitCheckout()"
+                    >
+
+                        Place Order 🍴
+
+                    </button>
+
+
+                    <a
+                        href="cart.html"
+                        class="back-cart-btn"
+                    >
+
+                        ← Back to Cart
+
+                    </a>
+
+
+                    <div class="checkout-security">
+
+                        🔒 Secure checkout
+
+                        <span>•</span>
+
+                        Your information is protected
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div>
+
+                <h3>
+                    🍴 BiteWise
+                </h3>
+
+                <p>
+                    Compare food. Save money. Eat smarter.
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h4>
+                    Quick Links
+                </h4>
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+                <a href="shop.html">
+                    Restaurants
+                </a>
+
+                <a href="cart.html">
+                    Cart
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 BiteWise. All rights reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<!-- =====================================================
+     MAIN BITEWISE JAVASCRIPT
+===================================================== -->
+
+<script src="../js/script.js"></script>
+
+
+<script>
+
+/* =====================================================
+   GET CART
+===================================================== */
+
+function getCheckoutCart() {
+
+    try {
+
+        const saved =
+            localStorage.getItem(
+                "bitewiseCart"
+            );
+
+        if (!saved) {
+            return [];
+        }
+
+        const parsed =
+            JSON.parse(saved);
+
+        return Array.isArray(parsed)
+            ? parsed
+            : [];
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Checkout cart error:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   GET TOTALS
+===================================================== */
+
+function getCheckoutTotals() {
+
+    const currentCart =
+        getCheckoutCart();
+
+
+    let subtotal = 0;
+
+
+    currentCart.forEach(
+        function (item) {
+
+            const price =
+                Number(
+                    item.price ||
+                    item.foodPrice ||
+                    0
+                );
+
+            const quantity =
+                Number(
+                    item.quantity || 1
+                );
+
+            subtotal +=
+                price * quantity;
+
+        }
+    );
+
+
+    const delivery =
+        currentCart.length > 0
+            ? 40
+            : 0;
+
+
+    const discount =
+        subtotal >= 500
+            ? 50
+            : 0;
+
+
+    const total =
+        Math.max(
+            subtotal +
+            delivery -
+            discount,
+            0
+        );
+
+
+    return {
+        subtotal,
+        delivery,
+        discount,
+        total
+    };
+
+}
+
+
+/* =====================================================
+   RENDER CHECKOUT ITEMS
+===================================================== */
+
+function renderCheckoutItems() {
+
+    const container =
+        document.getElementById(
+            "checkoutItems"
+        );
+
+
+    if (!container) {
+        return;
+    }
+
+
+    const currentCart =
+        getCheckoutCart();
+
+
+    if (currentCart.length === 0) {
+
+        container.innerHTML = `
+
+            <div class="checkout-empty">
+
+                <div class="checkout-empty-icon">
+                    🛒
+                </div>
+
+                <h3>
+                    Your cart is empty
+                </h3>
+
+                <p>
+                    Add some delicious food first.
+                </p>
+
+                <a
+                    href="shop.html"
+                    class="back-cart-btn"
+                >
+                    Browse Food
+                </a>
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    container.innerHTML =
+        currentCart.map(
+            function (item) {
+
+                const name =
+                    item.name ||
+                    item.foodName ||
+                    "Food Item";
+
+
+                const restaurant =
+                    item.restaurant ||
+                    item.restaurantName ||
+                    "BiteWise Restaurant";
+
+
+                const price =
+                    Number(
+                        item.price ||
+                        item.foodPrice ||
+                        0
+                    );
+
+
+                const quantity =
+                    Number(
+                        item.quantity || 1
+                    );
+
+
+                const total =
+                    price * quantity;
+
+
+                const image =
+                    item.image ||
+                    "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80";
+
+
+                return `
+
+                    <div class="summary-item">
+
+                        <img
+                            src="${image}"
+                            class="summary-food-image"
+                            alt="${name}"
+                            onerror="
+                                this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80'
+                            "
+                        >
+
+                        <div class="summary-item-info">
+
+                            <strong>
+                                ${name}
+                            </strong>
+
+                            <small>
+                                ${restaurant}
+                                •
+                                ${quantity} × ₹${price}
+                            </small>
+
+                        </div>
+
+                        <strong class="summary-item-price">
+                            ₹${total}
+                        </strong>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+/* =====================================================
+   RENDER SUMMARY
+===================================================== */
+
+function renderCheckoutSummary() {
+
+    const totals =
+        getCheckoutTotals();
+
+
+    const subtotal =
+        document.getElementById(
+            "checkoutSubtotal"
+        );
+
+
+    const delivery =
+        document.getElementById(
+            "checkoutDelivery"
+        );
+
+
+    const discount =
+        document.getElementById(
+            "checkoutDiscount"
+        );
+
+
+    const total =
+        document.getElementById(
+            "checkoutTotal"
+        );
+
+
+    if (subtotal) {
+
+        subtotal.textContent =
+            `₹${totals.subtotal}`;
+
+    }
+
+
+    if (delivery) {
+
+        delivery.textContent =
+            `₹${totals.delivery}`;
+
+    }
+
+
+    if (discount) {
+
+        discount.textContent =
+            `- ₹${totals.discount}`;
+
+    }
+
+
+    if (total) {
+
+        total.textContent =
+            `₹${totals.total}`;
+
+    }
+
+}
+
+
+/* =====================================================
+   PAYMENT METHODS
+===================================================== */
+
+function setupPaymentMethods() {
+
+    const radios =
+        document.querySelectorAll(
+            'input[name="payment"]'
+        );
+
+
+    radios.forEach(
+        function (radio) {
+
+            radio.addEventListener(
+                "change",
+                function () {
+
+                    const upi =
+                        document.getElementById(
+                            "upiDetails"
+                        );
+
+
+                    const card =
+                        document.getElementById(
+                            "cardDetails"
+                        );
+
+
+                    upi.style.display =
+                        "none";
+
+
+                    card.style.display =
+                        "none";
+
+
+                    if (
+                        this.value === "UPI"
+                    ) {
+
+                        upi.style.display =
+                            "block";
+
+                    }
+
+
+                    if (
+                        this.value === "Card"
+                    ) {
+
+                        card.style.display =
+                            "block";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   INPUT FORMATTING
+===================================================== */
+
+function setupInputFormatting() {
+
+    const phone =
+        document.getElementById(
+            "phone"
+        );
+
+
+    const pincode =
+        document.getElementById(
+            "pincode"
+        );
+
+
+    const cardNumber =
+        document.getElementById(
+            "cardNumber"
+        );
+
+
+    const expiry =
+        document.getElementById(
+            "expiry"
+        );
+
+
+    if (phone) {
+
+        phone.addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value
+                        .replace(/\D/g, "")
+                        .slice(0, 10);
+
+            }
+        );
+
+    }
+
+
+    if (pincode) {
+
+        pincode.addEventListener(
+            "input",
+            function () {
+
+                this.value =
+                    this.value
+                        .replace(/\D/g, "")
+                        .slice(0, 6);
+
+            }
+        );
+
+    }
+
+
+    if (cardNumber) {
+
+        cardNumber.addEventListener(
+            "input",
+            function () {
+
+                let value =
+                    this.value
+                        .replace(/\D/g, "")
+                        .slice(0, 16);
+
+
+                value =
+                    value.replace(
+                        /(.{4})/g,
+                        "$1 "
+                    ).trim();
+
+
+                this.value =
+                    value;
+
+            }
+        );
+
+    }
+
+
+    if (expiry) {
+
+        expiry.addEventListener(
+            "input",
+            function () {
+
+                let value =
+                    this.value
+                        .replace(/\D/g, "")
+                        .slice(0, 4);
+
+
+                if (
+                    value.length >= 3
+                ) {
+
+                    value =
+                        value.slice(0, 2) +
+                        "/" +
+                        value.slice(2);
+
+                }
+
+
+                this.value =
+                    value;
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   PREPARE ORDER ITEMS
+===================================================== */
+
+function prepareOrderItems() {
+
+    const currentCart =
+        getCheckoutCart();
+
+
+    return currentCart.map(
+        function (item) {
+
+            const foodId =
+                Number(
+                    item.food_id ??
+                    item.foodId ??
+                    item.id
+                );
+
+
+            const quantity =
+                Number(
+                    item.quantity || 1
+                );
+
+
+            const price =
+                Number(
+                    item.price ||
+                    item.foodPrice ||
+                    0
+                );
+
+
+            return {
+
+                food_id:
+                    foodId,
+
+                quantity:
+                    quantity,
+
+                price:
+                    price
+
+            };
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   SUBMIT CHECKOUT
+   FRONTEND → NODE.JS → MYSQL
+===================================================== */
+
+async function submitCheckout() {
+
+    const currentCart =
+        getCheckoutCart();
+
+
+    /* EMPTY CART */
+
+    if (
+        !currentCart ||
+        currentCart.length === 0
+    ) {
+
+        showToast(
+            "Your cart is empty!"
+        );
+
+        return;
+
+    }
+
+
+    /* DELIVERY DETAILS */
+
+    const name =
+        document.getElementById(
+            "customerName"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "phone"
+        ).value.trim();
+
+
+    const address =
+        document.getElementById(
+            "address"
+        ).value.trim();
+
+
+    const city =
+        document.getElementById(
+            "city"
+        ).value.trim();
+
+
+    const pincode =
+        document.getElementById(
+            "pincode"
+        ).value.trim();
+
+
+    /* VALIDATION */
+
+    if (
+        !name ||
+        !phone ||
+        !address ||
+        !city ||
+        !pincode
+    ) {
+
+        showToast(
+            "Please fill all delivery details."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        phone.length !== 10
+    ) {
+
+        showToast(
+            "Enter a valid 10-digit phone number."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        pincode.length !== 6
+    ) {
+
+        showToast(
+            "Enter a valid 6-digit pincode."
+        );
+
+        return;
+
+    }
+
+
+    /* PAYMENT */
+
+    const selectedPayment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    if (!selectedPayment) {
+
+        showToast(
+            "Please select a payment method."
+        );
+
+        return;
+
+    }
+
+
+    const payment =
+        selectedPayment.value;
+
+
+    /* UPI */
+
+    if (
+        payment === "UPI"
+    ) {
+
+        const upi =
+            document.getElementById(
+                "upiId"
+            ).value.trim();
+
+
+        if (!upi) {
+
+            showToast(
+                "Please enter your UPI ID."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    /* CARD */
+
+    if (
+        payment === "Card"
+    ) {
+
+        const cardNumber =
+            document.getElementById(
+                "cardNumber"
+            ).value
+            .replace(/\s/g, "");
+
+
+        const expiry =
+            document.getElementById(
+                "expiry"
+            ).value.trim();
+
+
+        const cvv =
+            document.getElementById(
+                "cvv"
+            ).value.trim();
+
+
+        if (
+            cardNumber.length !== 16 ||
+            !/^\d{2}\/\d{2}$/.test(expiry) ||
+            cvv.length !== 3
+        ) {
+
+            showToast(
+                "Please enter valid card details."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    /* TOTALS */
+
+    const totals =
+        getCheckoutTotals();
+
+
+    /* ORDER ITEMS */
+
+    const orderItems =
+        prepareOrderItems();
+
+
+    /* CHECK FOOD IDs */
+
+    const invalidItem =
+        orderItems.some(
+            function (item) {
+
+                return (
+                    !item.food_id ||
+                    item.food_id <= 0 ||
+                    !item.quantity ||
+                    item.quantity <= 0
+                );
+
+            }
+        );
+
+
+    if (invalidItem) {
+
+        console.error(
+            "Invalid order items:",
+            orderItems
+        );
+
+        showToast(
+            "Some food items are invalid. Please try again."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       TEMPORARY USER
+
+       Login system connect
+       pannum varaikkum
+       user_id = 1 use pannuvom.
+    */
+
+    const userId =
+        Number(
+            localStorage.getItem(
+                "bitewiseUserId"
+            )
+        ) || 1;
+
+
+    /* BUTTON */
+
+    const placeButton =
+        document.getElementById(
+            "placeOrderButton"
+        );
+
+
+    if (placeButton) {
+
+        placeButton.disabled =
+            true;
+
+        placeButton.textContent =
+            "Placing Order...";
+
+    }
+
+
+    try {
+
+        /* ==========================================
+           SEND ORDER + ITEMS TO BACKEND
+        ========================================== */
+
+        const response =
+            await fetch(
+                "http://localhost:5000/api/orders",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            user_id:
+                                userId,
+
+                            total_amount:
+                                totals.total,
+
+                            payment_method:
+                                payment,
+
+                            items:
+                                orderItems
+
+                        })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        /* API ERROR */
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.error ||
+                "Failed to create order"
+            );
+
+        }
+
+
+        console.log(
+            "Order + Order Items saved to MySQL:",
+            data
+        );
+
+
+        /* ==========================================
+           CREATE FRONTEND ORDER
+        ========================================== */
+
+        const order = {
+
+            orderId:
+                data.order_id,
+
+            customerName:
+                name,
+
+            phone:
+                phone,
+
+            address:
+                address,
+
+            city:
+                city,
+
+            pincode:
+                pincode,
+
+            paymentMethod:
+                payment,
+
+            items:
+                currentCart,
+
+            subtotal:
+                totals.subtotal,
+
+            deliveryFee:
+                totals.delivery,
+
+            discount:
+                totals.discount,
+
+            total:
+                totals.total,
+
+            orderDate:
+                new Date()
+                    .toLocaleString()
+
+        };
+
+
+        /* SAVE ORDER FOR SUCCESS PAGE */
+
+        localStorage.setItem(
+            "bitewiseOrder",
+            JSON.stringify(order)
+        );
+
+
+        /* CLEAR CART */
+
+        localStorage.removeItem(
+            "bitewiseCart"
+        );
+
+
+        /* GO TO SUCCESS */
+
+        window.location.href =
+            "success.html";
+
+    }
+
+
+    catch (error) {
+
+        console.error(
+            "Checkout error:",
+            error
+        );
+
+
+        showToast(
+            error.message ||
+            "Unable to place order. Please try again."
+        );
+
+
+        /* ENABLE BUTTON */
+
+        if (placeButton) {
+
+            placeButton.disabled =
+                false;
+
+            placeButton.textContent =
+                "Place Order 🍴";
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        updateCartCount();
+
+        renderCheckoutItems();
+
+        renderCheckoutSummary();
+
+        setupPaymentMethods();
+
+        setupInputFormatting();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>

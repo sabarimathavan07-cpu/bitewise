@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Your Cart | BiteWise</title>
+
+    <link
+        rel="stylesheet"
+        href="../css/style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           BITEWISE PROFESSIONAL CART PAGE
+        ===================================================== */
+
+        .cart-page {
+            background: #f7f7f7;
+            min-height: 70vh;
+            padding: 45px 0 70px;
+        }
+
+
+        /* =====================================================
+           PAGE TITLE
+        ===================================================== */
+
+        .cart-page-header {
+            margin-bottom: 32px;
+        }
+
+        .cart-page-header .section-tag {
+            color: #ff5a1f;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+        }
+
+        .cart-page-header h1 {
+            margin: 8px 0 5px;
+            font-size: 38px;
+            font-weight: 800;
+            color: #111827;
+        }
+
+        .cart-page-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+
+        /* =====================================================
+           CART LAYOUT
+        ===================================================== */
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 370px;
+            gap: 28px;
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           CART ITEMS AREA
+        ===================================================== */
+
+        .cart-items {
+            min-width: 0;
+        }
+
+
+        /* =====================================================
+           CART ITEM CARD
+        ===================================================== */
+
+        .cart-item {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 16px;
+
+            display: flex;
+            align-items: center;
+            gap: 18px;
+
+            border: 1px solid #eeeeee;
+
+            box-shadow:
+                0 4px 18px rgba(0, 0, 0, 0.05);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .cart-item:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+
+        /* =====================================================
+           FOOD IMAGE
+        ===================================================== */
+
+        .cart-item-image {
+            width: 105px;
+            height: 90px;
+
+            flex-shrink: 0;
+
+            border-radius: 14px;
+
+            object-fit: cover;
+
+            background: #eeeeee;
+        }
+
+
+        /* =====================================================
+           FOOD INFORMATION
+        ===================================================== */
+
+        .cart-item-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .cart-item-info h3 {
+            margin: 0 0 5px;
+
+            font-size: 18px;
+            font-weight: 750;
+
+            color: #111827;
+        }
+
+        .cart-item-info .restaurant-name {
+            margin: 0 0 8px;
+
+            color: #777777;
+            font-size: 14px;
+        }
+
+        .cart-item-info .food-price {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ff5a1f;
+        }
+
+
+        /* =====================================================
+           QUANTITY CONTROL
+        ===================================================== */
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0;
+
+            border: 1px solid #dddddd;
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            flex-shrink: 0;
+        }
+
+        .quantity-btn {
+            width: 34px;
+            height: 34px;
+
+            border: none;
+            background: #fff;
+
+            font-size: 19px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            color: #222;
+
+            transition: background 0.2s ease;
+        }
+
+        .quantity-btn:hover {
+            background: #fff1eb;
+            color: #ff5a1f;
+        }
+
+        .quantity {
+            width: 34px;
+
+            text-align: center;
+
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           ITEM TOTAL
+        ===================================================== */
+
+        .cart-item-total {
+            min-width: 95px;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: flex-end;
+
+            gap: 8px;
+        }
+
+        .cart-item-total strong {
+            font-size: 18px;
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+
+        /* =====================================================
+           REMOVE BUTTON
+        ===================================================== */
+
+        .remove-btn {
+            border: none;
+            background: transparent;
+
+            color: #ef4444;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            padding: 0;
+        }
+
+        .remove-btn:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           ORDER SUMMARY
+        ===================================================== */
+
+        .cart-summary {
+            background: #ffffff;
+
+            border-radius: 20px;
+
+            padding: 26px;
+
+            border: 1px solid #eeeeee;
+
+            box-shadow:
+                0 8px 28px rgba(0, 0, 0, 0.07);
+
+            position: sticky;
+            top: 20px;
+        }
+
+        .cart-summary h2 {
+            margin: 0 0 22px;
+
+            font-size: 22px;
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+
+        /* =====================================================
+           SUMMARY ROW
+        ===================================================== */
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 16px;
+
+            font-size: 15px;
+
+            color: #6b7280;
+        }
+
+        .summary-row strong {
+            color: #222222;
+            font-weight: 700;
+        }
+
+        .summary-row.discount strong {
+            color: #16a34a;
+        }
+
+
+        .cart-summary hr {
+            border: none;
+
+            border-top: 1px solid #eeeeee;
+
+            margin: 20px 0;
+        }
+
+
+        /* =====================================================
+           TOTAL
+        ===================================================== */
+
+        .summary-total {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 22px;
+        }
+
+        .summary-total span {
+            font-size: 17px;
+            font-weight: 700;
+
+            color: #111827;
+        }
+
+        .summary-total strong {
+            font-size: 26px;
+            font-weight: 850;
+
+            color: #ff5a1f;
+        }
+
+
+        /* =====================================================
+           CHECKOUT BUTTON
+        ===================================================== */
+
+        .checkout-main-btn {
+            width: 100%;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 14px 18px;
+
+            background: #ff5a1f;
+            color: white;
+
+            font-size: 15px;
+            font-weight: 750;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+
+            margin-bottom: 12px;
+        }
+
+        .checkout-main-btn:hover {
+            background: #e94b12;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 18px rgba(255, 90, 31, 0.25);
+        }
+
+        .checkout-main-btn:disabled {
+            background: #cccccc;
+
+            cursor: not-allowed;
+
+            box-shadow: none;
+
+            transform: none;
+        }
+
+
+        /* =====================================================
+           CONTINUE SHOPPING
+        ===================================================== */
+
+        .continue-shopping {
+            display: block;
+
+            width: 100%;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            padding: 13px;
+
+            border-radius: 12px;
+
+            border: 1px solid #dddddd;
+
+            color: #333333;
+
+            font-size: 14px;
+            font-weight: 650;
+
+            background: white;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease;
+        }
+
+        .continue-shopping:hover {
+            background: #fff7f3;
+
+            border-color: #ff5a1f;
+
+            color: #ff5a1f;
+        }
+
+
+        /* =====================================================
+           SECURE CHECKOUT TEXT
+        ===================================================== */
+
+        .secure-checkout {
+            text-align: center;
+
+            margin-top: 17px;
+
+            color: #888888;
+
+            font-size: 12px;
+        }
+
+
+        /* =====================================================
+           EMPTY CART
+        ===================================================== */
+
+        .empty-state {
+            background: #ffffff;
+
+            border-radius: 20px;
+
+            padding: 55px 25px;
+
+            text-align: center;
+
+            border: 1px solid #eeeeee;
+
+            box-shadow:
+                0 5px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .empty-cart-icon {
+            width: 85px;
+            height: 85px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #fff1eb;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 40px;
+        }
+
+        .empty-state h2 {
+            margin: 0 0 8px;
+
+            font-size: 24px;
+
+            color: #111827;
+        }
+
+        .empty-state p {
+            margin: 0 0 22px;
+
+            color: #777777;
+
+            font-size: 14px;
+        }
+
+        .empty-cart-btn {
+            display: inline-block;
+
+            text-decoration: none;
+
+            background: #ff5a1f;
+
+            color: white;
+
+            padding: 12px 22px;
+
+            border-radius: 10px;
+
+            font-size: 14px;
+
+            font-weight: 700;
+        }
+
+        .empty-cart-btn:hover {
+            background: #e94b12;
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-summary {
+                position: static;
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .cart-page {
+                padding: 30px 0 50px;
+            }
+
+            .cart-page-header h1 {
+                font-size: 30px;
+            }
+
+            .cart-item {
+                display: grid;
+
+                grid-template-columns: 75px 1fr;
+
+                gap: 12px;
+
+                padding: 14px;
+            }
+
+            .cart-item-image {
+                width: 75px;
+                height: 75px;
+
+                grid-row: span 2;
+            }
+
+            .cart-item-info {
+                grid-column: 2;
+            }
+
+            .cart-item-controls {
+                grid-column: 2;
+
+                justify-self: start;
+            }
+
+            .cart-item-total {
+                grid-column: 2;
+
+                flex-direction: row;
+
+                justify-content: space-between;
+
+                align-items: center;
+
+                width: 100%;
+            }
+
+            .cart-summary {
+                padding: 20px;
+            }
+
+        }
+
+
+        @media (max-width: 420px) {
+
+            .cart-item-info h3 {
+                font-size: 16px;
+            }
+
+            .cart-item-info .restaurant-name {
+                font-size: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+    <div class="container nav-container">
+
+        <a
+            href="../index.html"
+            class="logo"
+        >
+            🍴 <span>BiteWise</span>
+        </a>
+
+
+        <nav class="nav">
+
+            <a href="../index.html">
+                Home
+            </a>
+
+
+            <a href="shop.html">
+                Restaurants
+            </a>
+
+
+            <a
+                href="cart.html"
+                class="active"
+            >
+                Cart 🛒
+
+                <span
+                    id="cartCount"
+                    class="cart-count"
+                >
+                    0
+                </span>
+
+            </a>
+
+
+            <a href="../index.html#login">
+                Login
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+    <section class="cart-page">
+
+        <div class="container">
+
+
+            <!-- =================================================
+                 PAGE HEADER
+            ================================================== -->
+
+            <div class="cart-page-header">
+
+                <span class="section-tag">
+                    YOUR CART
+                </span>
+
+                <h1>
+                    Your Food Cart 🛒
+                </h1>
+
+                <p>
+                    Review your items and place your order.
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 CART LAYOUT
+            ================================================== -->
+
+            <div class="cart-layout">
+
+
+                <!-- =================================================
+                     CART ITEMS
+                ================================================== -->
+
+                <div class="cart-items">
+
+                    <div id="cartContainer">
+
+                        <!-- Cart items will be loaded here -->
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ORDER SUMMARY
+                ================================================== -->
+
+                <aside class="cart-summary">
+
+
+                    <h2>
+                        Order Summary
+                    </h2>
+
+
+
+                    <!-- SUBTOTAL -->
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="cartSubtotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- DELIVERY -->
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery Fee
+                        </span>
+
+                        <strong id="deliveryFee">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- DISCOUNT -->
+
+                    <div class="summary-row discount">
+
+                        <span>
+                            Discount
+                        </span>
+
+                        <strong id="cartDiscount">
+                            - ₹0
+                        </strong>
+
+                    </div>
+
+
+
+                    <hr>
+
+
+
+                    <!-- TOTAL -->
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="cartTotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+
+                    <!-- CHECKOUT -->
+
+                    <button
+                        id="checkoutButton"
+                        class="checkout-main-btn"
+                        type="button"
+                        onclick="goToCheckout()"
+                    >
+
+                        Proceed to Checkout →
+
+                    </button>
+
+
+
+                    <!-- CONTINUE SHOPPING -->
+
+                    <a
+                        href="shop.html"
+                        class="continue-shopping"
+                    >
+
+                        ← Continue Shopping
+
+                    </a>
+
+
+
+                    <div class="secure-checkout">
+
+                        🔒 Secure & easy checkout
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+
+            <!-- BRAND -->
+
+            <div>
+
+                <h3>
+                    🍴 BiteWise
+                </h3>
+
+                <p>
+                    Compare food. Save money. Eat smarter.
+                </p>
+
+            </div>
+
+
+
+            <!-- QUICK LINKS -->
+
+            <div>
+
+                <h4>
+                    Quick Links
+                </h4>
+
+
+                <a href="../index.html">
+                    Home
+                </a>
+
+
+                <a href="shop.html">
+                    Restaurants
+                </a>
+
+
+                <a href="cart.html">
+                    Cart
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 BiteWise. All rights reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
+<div
+    id="toast"
+    class="toast"
+>
+</div>
+
+
+
+<!-- =====================================================
+     MAIN SCRIPT
+===================================================== -->
+
+<script src="../js/script.js"></script>
+
+
+
+<!-- =====================================================
+     CART PAGE SCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        updateCartCount();
+
+        renderCartPage();
+
+        updateCartPageSummary();
+
+    }
+);
+
+
+
+/* =====================================================
+   GET CART
+===================================================== */
+
+function getCurrentCart() {
+
+    try {
+
+        const savedCart =
+            localStorage.getItem(
+                "bitewiseCart"
+            );
+
+
+        if (!savedCart) {
+
+            return [];
+
+        }
+
+
+        const parsedCart =
+            JSON.parse(savedCart);
+
+
+        if (!Array.isArray(parsedCart)) {
+
+            return [];
+
+        }
+
+
+        return parsedCart;
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Cart loading error:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SAVE CART
+===================================================== */
+
+function saveCurrentCart(cart) {
+
+    localStorage.setItem(
+        "bitewiseCart",
+        JSON.stringify(cart)
+    );
+
+
+    updateCartCount();
+
+}
+
+
+
+/* =====================================================
+   RENDER CART
+===================================================== */
+
+function renderCartPage() {
+
+
+    const container =
+        document.getElementById(
+            "cartContainer"
+        );
+
+
+    if (!container) {
+
+        return;
+
+    }
+
+
+    const cart =
+        getCurrentCart();
+
+
+
+    /* =================================================
+       EMPTY CART
+    ================================================== */
+
+    if (cart.length === 0) {
+
+
+        container.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-cart-icon">
+
+                    🛒
+
+                </div>
+
+
+                <h2>
+                    Your cart is empty
+                </h2>
+
+
+                <p>
+                    Looks like you haven't added
+                    any delicious food yet.
+                </p>
+
+
+                <a
+                    href="shop.html"
+                    class="empty-cart-btn"
+                >
+
+                    Browse Restaurants 🍴
+
+                </a>
+
+            </div>
+
+        `;
+
+
+
+        const checkoutButton =
+            document.getElementById(
+                "checkoutButton"
+            );
+
+
+        if (checkoutButton) {
+
+            checkoutButton.disabled =
+                true;
+
+        }
+
+
+        return;
+
+    }
+
+
+
+    /* =================================================
+       ENABLE CHECKOUT
+    ================================================== */
+
+    const checkoutButton =
+        document.getElementById(
+            "checkoutButton"
+        );
+
+
+    if (checkoutButton) {
+
+        checkoutButton.disabled =
+            false;
+
+    }
+
+
+
+    /* =================================================
+       CREATE CART ITEMS
+    ================================================== */
+
+    container.innerHTML =
+        cart.map(
+            function (item, index) {
+
+
+                /* FOOD NAME */
+
+                const foodName =
+                    item.name ||
+                    item.foodName ||
+                    "Food Item";
+
+
+
+                /* RESTAURANT */
+
+                const restaurantName =
+                    item.restaurant ||
+                    item.restaurantName ||
+                    "BiteWise Restaurant";
+
+
+
+                /* PRICE */
+
+                const price =
+                    Number(
+                        item.price ||
+                        item.foodPrice ||
+                        0
+                    );
+
+
+
+                /* QUANTITY */
+
+                const quantity =
+                    Number(
+                        item.quantity || 1
+                    );
+
+
+
+                /* TOTAL */
+
+                const itemTotal =
+                    price *
+                    quantity;
+
+
+
+                /* IMAGE */
+
+                const image =
+                    item.image ||
+                    "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80";
+
+
+
+                return `
+
+                    <div class="cart-item">
+
+
+                        <!-- FOOD IMAGE -->
+
+                        <img
+                            src="${image}"
+                            alt="${foodName}"
+                            class="cart-item-image"
+                            onerror="
+                                this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=500&q=80'
+                            "
+                        >
+
+
+
+                        <!-- FOOD INFORMATION -->
+
+                        <div class="cart-item-info">
+
+                            <h3>
+                                ${foodName}
+                            </h3>
+
+
+                            <p class="restaurant-name">
+                                ${restaurantName}
+                            </p>
+
+
+                            <span class="food-price">
+                                ₹${price} each
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- QUANTITY -->
+
+                        <div class="cart-item-controls">
+
+
+                            <button
+                                type="button"
+                                class="quantity-btn"
+                                onclick="
+                                    changeCartQuantity(
+                                        ${index},
+                                        -1
+                                    )
+                                "
+                            >
+                                −
+                            </button>
+
+
+                            <span class="quantity">
+                                ${quantity}
+                            </span>
+
+
+                            <button
+                                type="button"
+                                class="quantity-btn"
+                                onclick="
+                                    changeCartQuantity(
+                                        ${index},
+                                        1
+                                    )
+                                "
+                            >
+                                +
+                            </button>
+
+
+                        </div>
+
+
+
+                        <!-- TOTAL -->
+
+                        <div class="cart-item-total">
+
+                            <strong>
+                                ₹${itemTotal}
+                            </strong>
+
+
+                            <button
+                                type="button"
+                                class="remove-btn"
+                                onclick="
+                                    removeCartItem(
+                                        ${index}
+                                    )
+                                "
+                            >
+
+                                Remove
+
+                            </button>
+
+                        </div>
+
+
+                    </div>
+
+                `;
+
+            }
+        ).join("");
+
+}
+
+
+
+/* =====================================================
+   REMOVE ITEM
+===================================================== */
+
+function removeCartItem(index) {
+
+
+    const cart =
+        getCurrentCart();
+
+
+    if (
+        index < 0 ||
+        index >= cart.length
+    ) {
+
+        return;
+
+    }
+
+
+
+    const removedItem =
+        cart[index];
+
+
+    const foodName =
+        removedItem.name ||
+        removedItem.foodName ||
+        "Item";
+
+
+
+    cart.splice(
+        index,
+        1
+    );
+
+
+
+    saveCurrentCart(
+        cart
+    );
+
+
+
+    renderCartPage();
+
+    updateCartPageSummary();
+
+    updateCartCount();
+
+
+
+    if (
+        typeof showToast ===
+        "function"
+    ) {
+
+        showToast(
+            foodName +
+            " removed from cart"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CHANGE QUANTITY
+===================================================== */
+
+function changeCartQuantity(
+    index,
+    change
+) {
+
+
+    const cart =
+        getCurrentCart();
+
+
+
+    if (
+        index < 0 ||
+        index >= cart.length
+    ) {
+
+        return;
+
+    }
+
+
+
+    const item =
+        cart[index];
+
+
+
+    let quantity =
+        Number(
+            item.quantity || 1
+        );
+
+
+
+    quantity +=
+        Number(change);
+
+
+
+    if (quantity <= 0) {
+
+        removeCartItem(
+            index
+        );
+
+        return;
+
+    }
+
+
+
+    item.quantity =
+        quantity;
+
+
+
+    saveCurrentCart(
+        cart
+    );
+
+
+
+    renderCartPage();
+
+    updateCartPageSummary();
+
+    updateCartCount();
+
+}
+
+
+
+/* =====================================================
+   UPDATE SUMMARY
+===================================================== */
+
+function updateCartPageSummary() {
+
+
+    const cart =
+        getCurrentCart();
+
+
+    let subtotal = 0;
+
+
+
+    cart.forEach(
+        function (item) {
+
+
+            const price =
+                Number(
+                    item.price ||
+                    item.foodPrice ||
+                    0
+                );
+
+
+            const quantity =
+                Number(
+                    item.quantity || 1
+                );
+
+
+            subtotal +=
+                price *
+                quantity;
+
+        }
+    );
+
+
+
+    /* DELIVERY */
+
+    const deliveryFee =
+        cart.length > 0
+            ? 40
+            : 0;
+
+
+
+    /* DISCOUNT */
+
+    const discount =
+        subtotal >= 500
+            ? 50
+            : 0;
+
+
+
+    /* TOTAL */
+
+    const total =
+        Math.max(
+            subtotal +
+            deliveryFee -
+            discount,
+            0
+        );
+
+
+
+    /* SUBTOTAL */
+
+    const subtotalElement =
+        document.getElementById(
+            "cartSubtotal"
+        );
+
+
+    if (subtotalElement) {
+
+        subtotalElement.textContent =
+            `₹${subtotal}`;
+
+    }
+
+
+
+    /* DELIVERY */
+
+    const deliveryElement =
+        document.getElementById(
+            "deliveryFee"
+        );
+
+
+    if (deliveryElement) {
+
+        deliveryElement.textContent =
+            `₹${deliveryFee}`;
+
+    }
+
+
+
+    /* DISCOUNT */
+
+    const discountElement =
+        document.getElementById(
+            "cartDiscount"
+        );
+
+
+    if (discountElement) {
+
+        discountElement.textContent =
+            `- ₹${discount}`;
+
+    }
+
+
+
+    /* TOTAL */
+
+    const totalElement =
+        document.getElementById(
+            "cartTotal"
+        );
+
+
+    if (totalElement) {
+
+        totalElement.textContent =
+            `₹${total}`;
+
+    }
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BiteWise | Login</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f8f8f8;
+        }
+
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* ================= LEFT SIDE ================= */
+
+        .login-visual {
+            width: 50%;
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(0, 0, 0, 0.45),
+                    rgba(0, 0, 0, 0.65)
+                ),
+                url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .visual-content {
+            position: absolute;
+            left: 60px;
+            bottom: 70px;
+            color: white;
+            max-width: 500px;
+        }
+
+        .visual-logo {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .visual-content h1 {
+            font-size: 44px;
+            line-height: 1.1;
+            margin: 0 0 18px;
+        }
+
+        .visual-content p {
+            font-size: 17px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* ================= RIGHT SIDE ================= */
+
+        .login-section {
+            width: 50%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            background: white;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .back-home {
+            display: inline-block;
+            margin-bottom: 35px;
+            text-decoration: none;
+            color: #777;
+            font-size: 14px;
+        }
+
+        .back-home:hover {
+            color: #ff4d00;
+        }
+
+        .login-header {
+            margin-bottom: 30px;
+        }
+
+        .login-header h2 {
+            font-size: 34px;
+            margin: 0 0 10px;
+            color: #222;
+        }
+
+        .login-header p {
+            margin: 0;
+            color: #777;
+            font-size: 15px;
+        }
+
+        /* ================= FORM ================= */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            height: 52px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 0 16px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-wrapper input:focus {
+            border-color: #ff4d00;
+            box-shadow: 0 0 0 3px rgba(255, 77, 0, 0.1);
+        }
+
+        .password-input {
+            padding-right: 65px !important;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            color: #777;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* ================= OPTIONS ================= */
+
+        .login-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0 25px;
+            font-size: 13px;
+        }
+
+        .remember {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: #666;
+        }
+
+        .remember input {
+            accent-color: #ff4d00;
+        }
+
+        .forgot-password {
+            color: #ff4d00;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ================= LOGIN BUTTON ================= */
+
+        .login-btn {
+            width: 100%;
+            height: 52px;
+            border: none;
+            border-radius: 12px;
+            background: #ff4d00;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .login-btn:hover {
+            background: #e64300;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(255, 77, 0, 0.25);
+        }
+
+        /* ================= DIVIDER ================= */
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 28px 0;
+            color: #aaa;
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #e5e5e5;
+        }
+
+        /* ================= GOOGLE ================= */
+
+        .google-btn {
+            width: 100%;
+            height: 52px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            transition: 0.3s;
+        }
+
+        .google-btn:hover {
+            background: #fafafa;
+            border-color: #bbb;
+        }
+
+        /* ================= SIGN UP ================= */
+
+        .signup-text {
+            text-align: center;
+            margin-top: 28px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .signup-text a {
+            color: #ff4d00;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            .login-page {
+                display: block;
+            }
+
+            .login-visual {
+                width: 100%;
+                min-height: 280px;
+            }
+
+            .visual-content {
+                left: 30px;
+                bottom: 30px;
+            }
+
+            .visual-logo {
+                font-size: 30px;
+            }
+
+            .visual-content h1 {
+                font-size: 28px;
+            }
+
+            .visual-content p {
+                display: none;
+            }
+
+            .login-section {
+                width: 100%;
+                min-height: auto;
+                padding: 35px 25px 50px;
+            }
+
+            .back-home {
+                margin-bottom: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <!-- ================= LEFT VISUAL ================= -->
+
+    <div class="login-visual">
+
+        <div class="visual-content">
+
+            <div class="visual-logo">
+                🍴 BiteWise
+            </div>
+
+            <h1>
+                Your food.<br>
+                Your choice.<br>
+                Your best price.
+            </h1>
+
+            <p>
+                Discover delicious food, explore restaurants,
+                and compare prices before you order with BiteWise.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= LOGIN SECTION ================= -->
+
+    <div class="login-section">
+
+        <div class="login-container">
+
+            <a href="../index.html" class="back-home">
+                ← Back to Home
+            </a>
+
+
+            <div class="login-header">
+
+                <h2>Welcome Back!</h2>
+
+                <p>
+                    Login to continue your BiteWise journey.
+                </p>
+
+            </div>
+
+
+            <!-- ================= FORM ================= -->
+
+            <form id="loginForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            class="password-input"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            onclick="togglePassword()"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="login-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        Remember me
+
+                    </label>
+
+                    <a
+                        href="#"
+                        class="forgot-password"
+                        onclick="forgotPassword()"
+                    >
+                        Forgot Password?
+                    </a>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+                    Login
+                </button>
+
+            </form>
+
+
+            <!-- ================= DIVIDER ================= -->
+
+            <div class="divider">
+                or
+            </div>
+
+
+            <!-- ================= GOOGLE ================= -->
+
+            <button
+                class="google-btn"
+                onclick="googleLogin()"
+            >
+                🔵 Continue with Google
+            </button>
+
+
+            <!-- ================= SIGN UP ================= -->
+
+            <div class="signup-text">
+
+                Don't have an account?
+
+                <a
+                    href="#"
+                    onclick="createAccount()"
+                >
+                    Create Account
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* ================= PASSWORD ================= */
+
+    function togglePassword() {
+
+        const password =
+            document.getElementById("password");
+
+        const button =
+            document.querySelector(".show-password");
+
+        if (password.type === "password") {
+
+            password.type = "text";
+            button.textContent = "Hide";
+
+        } else {
+
+            password.type = "password";
+            button.textContent = "Show";
+
+        }
+
+    }
+
+
+    /* ================= LOGIN ================= */
+
+    document
+        .getElementById("loginForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+            const email =
+                document.getElementById("email").value.trim();
+
+            const password =
+                document.getElementById("password").value.trim();
+
+            if (!email || !password) {
+
+                alert("Please enter your email and password.");
+                return;
+
+            }
+
+            /*
+                Demo login only.
+                Backend authentication can be
+                connected later.
+            */
+
+            localStorage.setItem(
+                "bitewiseLoggedIn",
+                "true"
+            );
+
+            localStorage.setItem(
+                "bitewiseUserEmail",
+                email
+            );
+
+            alert("Login successful! Welcome to BiteWise.");
+
+            window.location.href = "../index.html";
+
+        });
+
+
+    /* ================= GOOGLE ================= */
+
+    function googleLogin() {
+
+        alert(
+            "Google Login will be connected when backend authentication is added."
+        );
+
+    }
+
+
+    /* ================= FORGOT PASSWORD ================= */
+
+    function forgotPassword() {
+
+        alert(
+            "Password recovery will be available with backend authentication."
+        );
+
+    }
+
+
+    /* ================= CREATE ACCOUNT ================= */
+
+    function createAccount() {
+
+        alert(
+            "Account registration page can be added next."
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
