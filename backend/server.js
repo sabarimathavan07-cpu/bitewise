@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 app.get("/api/restaurants", (req, res) => {
 
-    const sql = "SELECT * FROM Restaurants";
+    const sql = "SELECT * FROM restaurants";
 
     db.query(sql, (err, results) => {
 
@@ -52,7 +52,7 @@ app.get("/api/restaurants", (req, res) => {
 
 app.get("/api/foods", (req, res) => {
 
-    const sql = "SELECT * FROM Foods";
+    const sql = "SELECT * FROM foods";
 
     db.query(sql, (err, results) => {
 
@@ -87,7 +87,7 @@ app.get("/api/compare/:foodId", (req, res) => {
             delivery_fee,
             rating,
             final_price
-        FROM Price_Comparisons
+        FROM price_comparisons
         WHERE food_id = ?
         ORDER BY final_price ASC
     `;
@@ -173,7 +173,7 @@ app.post("/api/orders", (req, res) => {
         // ===============================
 
         const orderSql = `
-            INSERT INTO Orders
+            INSERT INTO orders
             (
                 user_id,
                 total_amount,
@@ -237,7 +237,9 @@ app.post("/api/orders", (req, res) => {
                     );
 
 
-                    // Validate food ID
+                    // ===============================
+                    // VALIDATE FOOD ID
+                    // ===============================
 
                     if (!foodId || foodId <= 0) {
 
@@ -252,7 +254,9 @@ app.post("/api/orders", (req, res) => {
                     }
 
 
-                    // Validate quantity
+                    // ===============================
+                    // VALIDATE QUANTITY
+                    // ===============================
 
                     if (!quantity || quantity <= 0) {
 
@@ -282,7 +286,7 @@ app.post("/api/orders", (req, res) => {
                 // ===============================
 
                 const itemSql = `
-                    INSERT INTO Order_Items
+                    INSERT INTO order_items
                     (
                         order_id,
                         food_id,
